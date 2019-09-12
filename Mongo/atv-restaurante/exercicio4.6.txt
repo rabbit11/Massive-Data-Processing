@@ -1,0 +1,6 @@
+4.6- Escreva uma consulta mongoDB para exibir todos os restaurantes que estão no bairro Bronx.
+ Quantos documentos são?
+
+db.restaurants.find({"borough": "Bronx"}).count()
+ 
+309 documentos foram retornados.

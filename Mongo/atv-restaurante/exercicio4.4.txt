@@ -1,0 +1,4 @@
+4.4- Escreva uma consulta mongoDB para exibir os campos restaurant_id, 
+nome, bairro e gastronomia para todos os documentos no restaurante da coleção.
+
+db.restaurants.find({}, {restaurant_id: 1, name: 1, borough: 1, cuisine: 1})

@@ -1,0 +1,3 @@
+4.9- Escreva uma consulta mongoDB para encontrar os restaurantes que alcançaram uma pontuação superior a 90.
+
+ db.restaurants.find({"grades.score": {$gt: 90}})

@@ -1,0 +1,4 @@
+4.8- Escreva uma consulta mongoDB para exibir restaurantes do bairro Bronx:
+os próximos 5 restaurantes depois de pular os primeiros 5 que ficam nesse bairro.
+
+db.restaurants.find({"borough": "Bronx"}).skip(5).limit(5)

@@ -1,0 +1,7 @@
+4.11- Escreva uma consulta do mongoDB para encontrar os restaurantes que não preparam qualquer culinária de
+ "American" e alcançaram uma pontuação de classificação 'A' e não pertencem ao bairro Brooklyn. 
+ O documento deve ser exibido de acordo com a cozinha em ordem decrescente.
+  Dica: usar expressão regular para cuisine.
+
+    db.restaurants.find( { $and: [{"cuisine": { $not: /^American.*/}, {"score": "A"} } ] } )
+

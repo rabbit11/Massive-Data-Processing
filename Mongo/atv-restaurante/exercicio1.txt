@@ -1,0 +1,2 @@
+Quantos documentos a coleção tem? (db.restaurants.count())
+    A coleção possui 3772 documentos.

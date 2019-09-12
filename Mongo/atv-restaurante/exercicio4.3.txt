@@ -1,0 +1,5 @@
+4.3- Pesquise na documentação do mongoDB uma forma para fazer a importação dos dados utilizando como id da coleção o atributo restaurant_id. Qual é o comando?
+ (option --upsertFields)
+
+ O comando seria "mongoimport --db NTBD --collection restaurants --file restaurants_street.json --upsertFields"
+    onde caso não especificarmos parâmetros para upsertFields, ele automaticamente utiliza o id da coleção.

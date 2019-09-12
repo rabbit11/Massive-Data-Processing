@@ -1,0 +1,10 @@
+4.10- Escreva uma consulta mongoDB para encontrar os restaurantes que alcançaram uma pontuação,
+ mais de 80 mas menos de 100. Compare os resultados usando $elemMatch() e não.
+
+  db.restaurants.find({"grades.score": { $gt: 80, $lt: 100}})
+
+  db.restaurants.find({"grades": { $elemMatch: { score: {$gt: 80, $lt: 100}}}})
+
+  Com $elemMatch ele filtra os resultados corretamente, já sem ele utiliza apenas a primeira query, ou seja, pega apenas
+    os elementos com score maiores de 80, sem excluir aqueles maiores de 100, retornando 4 elementos, enquanto com $elemMatch,
+    retorna 3 elementos.

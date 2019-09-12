@@ -1,0 +1,3 @@
+4.7- Escreva uma consulta mongoDB para exibir os primeiros 5 restaurantes que estão no bairro Bronx.
+
+db.restaurants.find({"borough": "Bronx"}).limit(5)
