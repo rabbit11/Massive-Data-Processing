@@ -1,0 +1,9 @@
+4.12- Escreva uma consulta mongoDB para encontrar o Id, o nome, o bairro e o tipo de gastronomia do restaurante,
+ para os restaurantes que pertencem aos bairros Staten Island ou Queens ou Bronx ou Brooklyn.
+
+    db.restaurants.find({ $or: [ {"borough": { $regex: /^Brooklyn.*/}},
+     {"borough": { $regex: /^Staten Island.*/} },
+      {"borough": { $regex: /^Queens.*/} },
+        {"borough": { $regex: /^Bronx.*/} } ] },
+        {"restaurant_id": 1, "name": 1, "borough": 1, "cuisine": 1})
+        

@@ -3,5 +3,9 @@
  O documento deve ser exibido de acordo com a cozinha em ordem decrescente.
   Dica: usar expressão regular para cuisine.
 
-    db.restaurants.find( { $and: [{"cuisine": { $not: /^American.*/}, {"score": "A"} } ] } )
+    db.restaurants.find({ $and: [ {"cuisine": { $not: /^American.*/} }, {"grades.grade": "A"}, {"borough": { $not: /^Brooklyn.*/}} ] })
 
+
+    "cuisine": { $not: /^American.*/}
+    "grades.grade": "A"
+    "borough": { $not: /^Brooklyn.*/}

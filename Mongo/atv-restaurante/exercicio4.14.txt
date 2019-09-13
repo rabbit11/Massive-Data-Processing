@@ -1,0 +1,5 @@
+4.14- Escreva uma consulta do mongoDB para encontrar o Id, nome, bairro e tipo de gastronomia do restaurante,
+ para os restaurantes que alcançaram uma pontuação que não é superior a 10.
+
+ db.restaurants.find({"grades.score": {$lte: 10} },
+        {"restaurant_id": 1, "name": 1, "borough": 1, "cuisine": 1})
