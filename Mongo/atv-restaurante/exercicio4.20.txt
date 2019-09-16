@@ -1,0 +1,6 @@
+4.20- Escreva uma consulta mongoDB para encontrar o nome do restaurante, o bairro,
+ a longitude e a altitude e a gastronomia,
+  para os restaurantes que contêm a substring "mon" (três letras em algum lugar do nome).
+
+  db.restaurants.find({"name": { $regex: /m.*mon/}} ,
+ {"name": 1, "borough": 1, "address.coord": 1, "cuisine": 1 })

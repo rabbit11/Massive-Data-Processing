@@ -1,0 +1,4 @@
+4.21- Escreva uma consulta mongoDB para contar quantos tipos de gastronomia diferentes têm. 
+Use .disctinct() // tente usar map/reduce
+
+db.restaurants.distinct("cuisine").length
