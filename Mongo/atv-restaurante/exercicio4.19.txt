@@ -1,0 +1,6 @@
+4.19- Escreva uma consulta mongoDB que selecionará o Id, o nome e as notas do restaurante,
+para os restaurantes que retornam 0 como resto da divisão da pontuação por 7.
+
+
+db.restaurants.find({"grades.score": { $mod: [7, 0] } },
+ {"restaurant_id": 1, "name": 1, "grades.score": 1})

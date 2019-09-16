@@ -1,0 +1,3 @@
+4.18- Escreva uma consulta mongoDB para saber o número de restaurantes que não tem rua no endereço.
+
+db.restaurants.find({"address.street": {$exists: false}}).count()

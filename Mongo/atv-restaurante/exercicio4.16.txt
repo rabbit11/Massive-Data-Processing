@@ -1,0 +1,4 @@
+4.16- Escreva uma consulta mongoDB para exibir todos os dados dos restaurantes,
+ e ordene pelo nome do restaurante em ordem crescente.
+
+db.restaurants.find().sort({name: 1})
