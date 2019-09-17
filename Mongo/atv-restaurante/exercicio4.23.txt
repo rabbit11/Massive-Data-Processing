@@ -1,0 +1,13 @@
+4.23- Realize novamente a consulta do exercício 4.10 e recorde o tempo de execução em milissegundos ao adicionar o seguinte trecho em negrito à consulta:
+db.restaurants.find({...}).explain("executionStats").executionStats.executionTimeMillis
+Crie um índice através da função createIndex para esta consulta.
+Execute novamente a consulta 4.10 e recorde o tempo de execução.
+O que você pode concluir sobre a utilização de índice na performance da consulta?
+
+  db.restaurants.find({"grades": { $elemMatch: { score: {$gt: 80, $lt: 100}}}}).explain("executionStats").executionStats.executionTimeMillis
+  db.restaurants.createIndex({"grades.score": 1})
+
+    A query sem a criação deste índice teve tempo de execução de 15 milissegundos.
+    Já com a criação do índice, seu tempo de execução foi de menos de 0 milissegundos
+
+

@@ -2,5 +2,5 @@
  o endereço e a localização geográfica do restaurante,
   para os restaurantes em que o 2º elemento da matriz coord contém um valor superior a 42 e até 52 - (42,52].
 
-  db.restaurants.find({"address.coord.$[1]": { $elemMatch: {$gt: 42, $lte: 52} } },
-   {"restaurant_id": 1, "name": 1, "address": 1})
+  db.restaurants.find({"address.coord.1": {$gt : 42, $lte : 52}},
+    {"restaurant_id" : 1,"name":1,"address":1,"coord":1});

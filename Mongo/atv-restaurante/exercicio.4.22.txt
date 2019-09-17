@@ -1,0 +1,3 @@
+4.22- Escreva uma consulta mongoDB para encontrar os restaurantes da rua Broadway.
+
+db.restaurants.find({"address.street": {$regex: /^Broadway.*/}})
