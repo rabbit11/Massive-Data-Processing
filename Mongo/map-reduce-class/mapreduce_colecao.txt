@@ -1,0 +1,30 @@
+db.vendas.insert(
+[
+{
+     customer_id: "1",
+     date: new Date("Oct 04, 2012"),
+     status: 'A',
+     price: 250,
+     items: [ { sku: "arroz", qty: 5, price: 2.5 },
+              { sku: "geladeira", qty: 5, price: 2.5 } ]
+},
+
+{
+     customer_id: "2",
+     date: new Date("Jan 04, 2013"),
+     status: 'A',
+     price: 500,
+     items: [ { sku: "arroz", qty: 15, price: 22.5 },
+              { sku: "tv", qty: 95, price: 26.5 } ]
+},
+
+{
+     customer_id: "1",
+     date: new Date("Apr 04, 2013"),
+     status: 'A',
+     price: 30,
+     items: [ { sku: "tv", qty: 55, price: 25 },
+              { sku: "geladeira", qty: 25, price: 28 } ]
+}
+]
+)

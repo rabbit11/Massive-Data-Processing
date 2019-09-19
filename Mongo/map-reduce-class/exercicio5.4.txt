@@ -1,0 +1,14 @@
+5.4- Calcule o valor total por status.
+
+
+var mapFunc2 = function() {
+    emit(this.status, this.price);
+}
+
+var reduceFunc2 = function(keySKU, values) {
+    return Array.sum(values);
+}
+
+db.vendas.mapReduce(mapFunc2, reduceFunc2, {out: "map_reduce_arroz"})
+
+db.map_reduce_arroz.find();

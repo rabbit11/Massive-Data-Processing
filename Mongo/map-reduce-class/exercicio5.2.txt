@@ -1,0 +1,3 @@
+5.2- Retorne todos os documentos que contêm vendas de 'arroz'.
+
+    db.vendas.find({items: {$elemMatch: { sku:"arroz"}}})

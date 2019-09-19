@@ -1,0 +1,15 @@
+5.5- Calcule o valor total por status, para valores (price) maiores que 30.
+
+var mapFunc3 = function() {
+    if(this.price > 30){
+        emit(this.status, this.price);
+    }
+}
+
+var reduceFunc3 = function(keySKU, values) {
+    return Array.sum(values);
+}
+
+db.vendas.mapReduce(mapFunc3, reduceFunc3, {out: "map_reduce_arroz"})
+
+db.map_reduce_arroz.find();

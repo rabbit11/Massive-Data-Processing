@@ -1,0 +1,14 @@
+5.6- Calcule o valor total das vendas.
+
+var mapFunc4 = function() {
+  
+        emit("1", this.price);
+}
+
+var reduceFunc4 = function(keySKU, values) {
+    return Array.sum(values);
+}
+
+db.vendas.mapReduce(mapFunc4, reduceFunc4, {out: "map_reduce_arroz"})
+
+db.map_reduce_arroz.find();

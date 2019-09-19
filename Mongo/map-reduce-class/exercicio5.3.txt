@@ -1,0 +1,17 @@
+5.3- Calcule a quantidade de itens do produto ‘arroz’.
+
+    var mapFunc = function() {
+    for(var i = 0; i < this.items.length; i++){
+        if(this.items[i].sku == "arroz"){
+            emit("arroz", this.items[i].qty);
+        }
+    }
+}
+
+var reduceFunc = function(keySKU, values) {
+    return Array.sum(values);
+}
+
+db.vendas.mapReduce(mapFunc, reduceFunc, {out: "map_reduce_arroz"})
+
+db.map_reduce_arroz.find();

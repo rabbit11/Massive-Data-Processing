@@ -1,0 +1,3 @@
+5.1- Mostre a coleção toda.
+
+ db.vendas.find({})
