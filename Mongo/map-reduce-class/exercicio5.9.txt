@@ -1,0 +1,28 @@
+5.9- Calcule a quantidade de itens adquiridos por categoria, considerando que existam duas categorias.
+Categoria Comestíveis – produtos: arroz, leite
+Categoria Eletrodomésticos – produtos: tv, geladeira
+
+
+var mapFunc7 = function() {
+    var value = {
+        count: 1,
+        sku: this.sku
+    };
+
+    for(var i = 0; i < this.items.length; i++) {
+        if(this.sku == "tv" || this.sku == "geladeira"){
+            emit("eletrodomesticos", 1);
+        }
+        else {
+            emit("comestiveis", 1);
+        }
+    }
+}
+
+var reduceFunc7 = function(keySKU, values) {
+    return Array.sum(values);
+}
+
+db.vendas.mapReduce(mapFunc7, reduceFunc7, {out: "map_reduce_arroz"})
+
+db.map_reduce_arroz.find();

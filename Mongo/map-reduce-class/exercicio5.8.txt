@@ -1,0 +1,18 @@
+5.8- Calcule o valor total por cliente, considerando o valor e a quantidade de cada um dos itens.
+
+var mapFunc6 = function() {
+    var values = 0;
+    for(var i = 0; i < this.items.length; i++) {
+        values += this.items[i].price;
+    }
+
+    emit(this.customer_id, values);
+}
+
+var reduceFunc6 = function(keySKU, values) {
+    return Array.sum(values);
+}
+
+db.vendas.mapReduce(mapFunc6, reduceFunc6, {out: "map_reduce_arroz"})
+
+db.map_reduce_arroz.find();

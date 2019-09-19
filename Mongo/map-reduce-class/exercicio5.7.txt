@@ -1,15 +1,32 @@
 5.7- Calcule o número de compras, o gasto total e a média (gasto total/número
 de compras) em R$ por cliente. Dica: use finalize
 
-var mapFunc4 = function() {
-  
-        emit("1", this.price);
+var mapFunc5 = function() {
+    var value = {
+        count: 1,
+        price: this.price
+    };
+
+    emit("1", value);
 }
 
-var reduceFunc4 = function(keySKU, values) {
-    return Array.sum(values);
+var reduceFunc5 = function(keySKU, values) {
+    var reducedVal = {count: 0, price: 0};
+
+    for(var i = 0; i < values.length; i++) {
+        reducedVal.count += values[i].count;
+        reducedVal.price += values[i].price;
+    }
+
+    return reducedVal;
 }
 
-db.vendas.mapReduce(mapFunc4, reduceFunc4, {out: "map_reduce_arroz"})
+var finalizeFunction5 = function(key, reducedVal) {
+    reducedVal.avg = reducedVal.price / reducedVal.count;
+
+    return reducedVal;
+}
+
+db.vendas.mapReduce(mapFunc5, reduceFunc5, {out: "map_reduce_arroz", finalize: finalizeFunction4})
 
 db.map_reduce_arroz.find();
