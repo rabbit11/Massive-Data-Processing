@@ -1,0 +1,15 @@
+4.24- Escreva uma consulta Map/Reduce do mongoDB para contar o número de restaurantes por 
+    tipo de gastronomia (cuisine).
+
+var mapFunc1 = function() {
+
+    emit(this.cuisine, 1);
+}
+
+var reduceFunc1 = function(keySKU, values) {
+    return Array.sum(values);
+}
+
+db.restaurants.mapReduce(mapFunc1, reduceFunc1, {out: "map_reduce_restaurant"});
+
+db.map_reduce_restaurant.find();

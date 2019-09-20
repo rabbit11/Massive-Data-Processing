@@ -4,22 +4,19 @@ Categoria Eletrodomésticos – produtos: tv, geladeira
 
 
 var mapFunc7 = function() {
-    var value = {
-        count: 1,
-        sku: this.sku
-    };
-
+    
     for(var i = 0; i < this.items.length; i++) {
-        if(this.sku == "tv" || this.sku == "geladeira"){
-            emit("eletrodomesticos", 1);
+        if(this.items[i].sku == "tv" || this.items[i].sku == "geladeira"){
+            emit("eletrodomesticos", this.items[i].qty);
         }
         else {
-            emit("comestiveis", 1);
+            emit("comestiveis", this.items[i].qty);
         }
     }
 }
 
 var reduceFunc7 = function(keySKU, values) {
+    
     return Array.sum(values);
 }
 

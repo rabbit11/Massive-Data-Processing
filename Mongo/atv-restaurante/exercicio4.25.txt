@@ -1,0 +1,35 @@
+4.25- Escreva uma consulta Map/Reduce do mongoDB para calcular a média das notas (score) por restaurante.
+
+var mapFunc2 = function() {
+    var value = {
+        count: 1,
+        score: 0
+    };
+
+    for(var i = 0; i < this.grades.length; i++) {
+        value.score += this.grades[i].score;
+    }
+
+    emit("1", value);
+}
+
+var reduceFunc2 = function(keySKU, values) {
+    var reducedVal = {count: 0, score: 0};
+
+    for(var i = 0; i < values.length; i++) {
+        reducedVal.count += values[i].count;
+        reducedVal.score += values[i].score;
+    }
+
+    return reducedVal;
+}
+
+var finalizeFunction2 = function(key, reducedVal) {
+    reducedVal.avg = reducedVal.score / reducedVal.count;
+
+    return reducedVal;
+}
+
+db.restaurants.mapReduce(mapFunc2, reduceFunc2, {out: "map_reduce_restaurantes", finalize: finalizeFunction2})
+
+db.map_reduce_restaurantes.find();
