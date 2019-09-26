@@ -1,0 +1,14 @@
+4.28- Escreva uma consulta mongoDB para contar quantos tipos de gastronomia diferentes têm. Use map/reduce!
+
+var mapFunc1 = function() {
+
+    emit(this.cuisine, 1);
+}
+
+var reduceFunc1 = function(keySKU, values) {
+    return Array.sum(values);
+}
+
+db.restaurants.mapReduce(mapFunc1, reduceFunc1, {out: "map_reduce_restaurant"});
+
+db.map_reduce_restaurant.find();

@@ -1,0 +1,31 @@
+4.26- Escreva uma consulta Map/Reduce do mongoDB para contar o número de restaurantes por tipo de 
+gastronomia (cuisine) por bairro (borough).
+
+var mapFunc1 = function() {
+    var value = {
+        count: 1,
+        cuisine: this.cuisine
+    };
+
+    emit(this.borough, value);
+}
+
+var reduceFunc1 = function(keySKU, values) {
+    for(var i = 0; i < values.length; i++) {
+        for(var j = 1; j < values.length - 1; j++) {
+            if(values[i].cuisine == values[j].cuisine) {
+                values[i].count++;
+            }
+        }
+    }
+    return values.count;
+}
+
+var finalizeFunction1 = function(key, reducedVal) {
+
+    return reducedVal;
+}
+
+db.restaurants.mapReduce(mapFunc1, reduceFunc1, {out: "map_reduce_restaurant"});
+
+db.map_reduce_restaurant.find();

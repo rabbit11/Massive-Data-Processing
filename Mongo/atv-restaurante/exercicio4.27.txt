@@ -1,0 +1,30 @@
+4.27- Escreva uma consulta Map/Reduce do mongoDB para contar os tipos de gastronomia (cuisine) diferentes 
+por bairro (borough).
+
+var mapFunc1 = function() {
+    emit(this.borough, this.cuisine);
+}
+
+var reduceFunc1 = function(keySKU, values) {
+    var flag = 0;
+    var count = 1;
+
+    for(var i = 0; i < values.length; i++) {
+        flag = 0;
+
+        for(var j = i + 1; j < values.length - i; j++) {
+            if(values[i] == values[j]) {
+                flag = 1;
+            }
+        }
+        if(flag == 0) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+db.restaurants.mapReduce(mapFunc1, reduceFunc1, {out: "map_reduce_restaurant"});
+
+db.map_reduce_restaurant.find();
