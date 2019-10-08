@@ -4,7 +4,8 @@ gastronomia (cuisine) por bairro (borough).
 var mapFunc1 = function() {
     var value = {
         count: 1,
-        cuisine: this.cuisine
+        cuisine: this.cuisine,
+        borough: this borough
     };
 
     emit(this.borough, value);
