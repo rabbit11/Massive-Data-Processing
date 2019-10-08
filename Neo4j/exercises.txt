@@ -1,0 +1,44 @@
+2- Retorne todos os filmes do BD.
+
+MATCH(mov:Movie) RETURN mov
+
+=============================================================================
+
+3- Retorne todos os atores do BD. Retorne 10 atores.
+
+MATCH(actors:Person) RETURN actors LIMIT 10
+
+=============================================================================
+
+4- Qual a idade de Tom Hanks? Dica: ano atual = (1970+timestamp()/(365*86400000)) 
+
+MATCH(actor: Person {name: "Tom Hanks"}) RETURN (1970+timestamp()/(365*86400000)) - actor.born
+
+=============================================================================
+5- Quem é mais velho, Tom Hanks ou Meg Ryan? Dica: use o case...when para não usar o LIMIT... ou 
+    agregação com min().
+
+MATCH p=shortestPath(
+  (tom:Person {name:"Tom Hanks"})-[*]-(meg:Person {name:"Meg Ryan"})
+)
+RETURN 
+    CASE
+        WHEN tom.born < meg.born
+        THEN tom.name
+        ELSE meg.name
+    END
+
+=============================================================================
+
+6- Quem gravou um filme primeiro, Tom Hanks ou Meg Ryan?
+
+MATCH(tom: Person {name: "Tom Hanks"})-[:ACTED_IN]->(tomMovies)
+
+MATCH(meg: Person {name: "Meg Ryan"})-[:ACTED_IN]->(megMovies)
+
+RETURN 
+    CASE
+        WHEN tomMovies.released < megMovies.released
+        THEN tom.name
+        ELSE meg.name
+    END
