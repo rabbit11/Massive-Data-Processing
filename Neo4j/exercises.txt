@@ -97,3 +97,17 @@ RETURN ((1970+timestamp()/(365*86400000)) - tom.born) - ((1970+timestamp()/(365*
 =============================================================================
 
 13- Acrescente o ator “Mel Gibson” com ano de nascimento 1956. Dica: faça junto com o 14.
+
+CREATE(Gibson: Person {name: 'Mel Gibson', born: 1956})
+
+=============================================================================
+
+14- Acrescente o filme “What Women Want” lançado no ano 2000, e os relacionamentos dos atores 
+Mel Gibson e Helen Hunt que atuaram nesse filme como Nick Marshall e Darcy McGuire,respectivamente.
+ Obs.: Helen Hunt já existe no grafo! Use merge.
+
+CREATE(WhatWomenWant: Movie {title:'What Women Want', released: 2000})
+
+MATCH 
+CREATE (Gibson)-[:ACTED_IN]->(WhatWomenWant),
+        (Helen)
