@@ -38,7 +38,62 @@ MATCH(meg: Person {name: "Meg Ryan"})-[:ACTED_IN]->(megMovies)
 
 RETURN 
     CASE
-        WHEN tomMovies.released < megMovies.released
+        WHEN min(tomMovies.released) < min(megMovies.released)
         THEN tom.name
         ELSE meg.name
     END
+
+=============================================================================
+
+7- Quais filmes o Tom Hanks atuou e dirigiu?
+
+MATCH(tom: Person {name: "Tom Hanks"})-[:ACTED_IN]->(tomMovies)<-[:DIRECTED]-(cruise: Person {name: "Tom Hanks"})
+
+RETURN tomMovies
+
+=============================================================================
+
+8- Em quais filmes uma pessoa foi ator e diretor?
+
+MATCH(people: Person)-[:ACTED_IN]->(movies)<-[DIRECTED]-(people: Person)
+
+RETURN movies
+
+=============================================================================
+
+9- Quais pessoas foram atores e diretores em um mesmo filme?
+
+MATCH(people: Person)-[:ACTED_IN]->(movies)<-[DIRECTED]-(people: Person)
+
+RETURN people
+
+=============================================================================
+
+10- Em quantos filmes Tom Hanks atuou?
+
+MATCH(tom: Person {name: "Tom Hanks"})-[:ACTED_IN]->(tomMovies)
+
+RETURN tomMovies, COUNT(*)
+
+=============================================================================
+
+11- Em quantos filmes cada ator atuou? Ordene decrescente pelo número de filmes.
+
+MATCH(people: Person)-[:ACTED_IN]->(movies)
+
+RETURN movies, COUNT(*)
+
+ORDER BY COUNT(*) DESC
+
+=============================================================================
+
+12- Qual a diferença de idade entre Tom Hanks e Meg Ryan?
+
+MATCH p=shortestPath(
+  (tom:Person {name:"Tom Hanks"})-[*]-(meg:Person {name:"Meg Ryan"})
+)
+RETURN ((1970+timestamp()/(365*86400000)) - tom.born) - ((1970+timestamp()/(365*86400000)) - meg.born) 
+
+=============================================================================
+
+13- Acrescente o ator “Mel Gibson” com ano de nascimento 1956. Dica: faça junto com o 14.
