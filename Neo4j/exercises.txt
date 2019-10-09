@@ -106,8 +106,84 @@ CREATE(Gibson: Person {name: 'Mel Gibson', born: 1956})
 Mel Gibson e Helen Hunt que atuaram nesse filme como Nick Marshall e Darcy McGuire,respectivamente.
  Obs.: Helen Hunt já existe no grafo! Use merge.
 
-CREATE(WhatWomenWant: Movie {title:'What Women Want', released: 2000})
+MATCH(Gibson: Person {name:"Mel Gibson"})
+MATCH(Helen: Person {name:"Helen Hunt"})
 
-MATCH 
-CREATE (Gibson)-[:ACTED_IN]->(WhatWomenWant),
-        (Helen)
+CREATE(WhatWomenWant: Movie {title:'What Women Want', released: 2000})
+CREATE (Gibson)-[:ACTED_IN{roles:['Nick Marshall']}]->(WhatWomenWant),
+        (Helen)-[:ACTED_IN{roles:['Darcy McGuire']}]->(WhatWomenWant)
+
+RETURN *
+
+=============================================================================
+*****
+15- Quais atores trabalharam com Meg Ryan mas não trabalharam com Tom Hanks.
+
+MATCH(tom: Person {name: "Tom Hanks"})
+MATCH(meg: Person {name: "Meg Ryan"})-[:ACTED_IN]->(movie)<-[:ACTED_IN]-(actors)
+WHERE NOT (tom)-[:ACTED_IN]->(movie)<-[:ACTED_IN]-(actors)
+
+RETURN DISTINCT actors
+
+=============================================================================
+
+16- Quais atores estão relacionados em até 5 passos com Tom Hanks.
+
+MATCH (tom:Person {name:"Tom Hanks"})-[*1..4]-(hollywood)
+
+RETURN DISTINCT hollywood
+
+=============================================================================
+
+17- Qual o caminho mínimo entre Tom Hanks e Val Kilmer.
+
+MATCH p=shortestPath(
+  (tom:Person {name:"Tom Hanks"})-[*]-(val:Person {name:"Val Kilmer"})
+)
+
+RETURN p
+=============================================================================
+
+18- Encontre atores e diretores que atuaram em filmes dos anos 90.
+
+MATCH(people: Person)-[:ACTED_IN]->(movie)<-[:DIRECTED]-(actors)
+WHERE movie.released >= 1990 AND movie.released <= 1999
+
+RETURN DISTINCT *
+
+
+=============================================================================
+
+19- Encontre quantos filmes dos anos 90 têm no BD.
+
+MATCH(movies: Movie) WHERE movies.released >= 1990 AND movies.released <= 1999
+
+RETURN movies
+
+=============================================================================
+
+20- Quais atores trabalharam com Billy Crystal e Tom Hanks.
+
+MATCH(tom: Person {name: "Tom Hanks"})-[:ACTED_IN]->(movie)<-[:ACTED_IN]-(actors),
+    (actors)-[:ACTED_IN]->(mov)<-[:ACTED_IN]-(billy: Person {name: "Billy Crystal"})
+
+RETURN actors
+
+=============================================================================
+
+21- Remova o ator Mel Gibson e todos os seus relacionamentos.
+
+MATCH(gibson: Person {name: "Mel Gibson"}) DETACH DELETE gibson
+
+=============================================================================
+
+25- "Desafio": Como fazer para retornar no Exercício 17 apenas os 
+relacionamentos que compõem o caminho?  
+
+MATCH p=shortestPath(
+  (tom:Person {name:"Tom Hanks"})-[*]-(val:Person {name:"Val Kilmer"})
+)
+
+RETURN DISTINCT p
+=============================================================================
+
