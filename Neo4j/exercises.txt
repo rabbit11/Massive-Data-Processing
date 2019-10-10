@@ -121,9 +121,9 @@ RETURN *
 
 MATCH(tom: Person {name: "Tom Hanks"})
 MATCH(meg: Person {name: "Meg Ryan"})-[:ACTED_IN]->(movie)<-[:ACTED_IN]-(actors)
-WHERE NOT (tom)-[:ACTED_IN]->(movie)<-[:ACTED_IN]-(actors)
 
-RETURN DISTINCT actors
+WHERE NOT (actors)-[:ACTED_IN*2]-(tom) AND NOT actors = tom
+RETURN  DISTINCT actors.name
 
 =============================================================================
 
