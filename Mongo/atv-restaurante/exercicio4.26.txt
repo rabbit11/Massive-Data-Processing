@@ -22,11 +22,6 @@ var reduceFunc1 = function(keySKU, values) {
     return values.count;
 }
 
-var finalizeFunction1 = function(key, reducedVal) {
-
-    return reducedVal;
-}
-
 db.restaurants.mapReduce(mapFunc1, reduceFunc1, {out: "map_reduce_restaurant"});
 
 db.map_reduce_restaurant.find();
