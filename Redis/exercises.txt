@@ -182,4 +182,17 @@ Teste:
 
 Explique a diferença entre o exercício 5 e 7 em termos de ações pós failover.
 
+    O pos failover quando utilizamos um sentinela ou nao sao bem similares, o maior
+    contraste nesses dois casos estaria na forma como o failover ocorre, sem sentinela
+    uma falha so e percebida quando uma requisicao e feita a um determinado no e a 
+    mesma nao e respondida, gerando assim a troca do master. Ja no uso de sentinela,
+    o sentinela verifica de forma quase constante se determinado no esta "vivo"
+    e caso nao esteja automaticamente elege outro master.
+
 ====================================================================================
+
+8- Tem implementação nativa de quorum no Redis?
+
+    Redis possui implementacao nativa de quorum, como foi demonstrada no exercicio anterior
+    sobre sentinelas, porem deve ser configurado pelo usuario de forma a escolher como o quorum deve
+    ser composto (numero de nos necessarios para se obter um quorum).
