@@ -1,0 +1,185 @@
+1- O que são slots no Redis e para que servem? Existe alocação usando hash no Redis?
+ Crie uma explicação integrando as duas perguntas. Mostre um exemplo dos slots 
+ atribuídos ao nó 7000 (Veja Passo 3.1!)
+
+    Slots no Redis sao conhecidos como Hash Slots, definidos pelo proprio SGBD de forma
+    a possibilitar o mapeamento dos dados nos diferentes nos pertencentes a um cluster.
+
+    Um exemplo disso seria que ao usarmos "get foo" no nó 7000, Redis nos retorna o slot 
+    12182 e todas suas informacoes associadas a este slot, o numero deste slot seria a 
+    posicao na hashtable implementada internamente na base de dados.
+
+
+====================================================================================
+
+2- Crie mais três nós no cluster  - de 7006 a 7008 (total de 9 nós). Crie uma 
+arquitetura de 3 conjuntos de réplicas (sharding), com duas réplicas para cada
+ coordenador (três cópias para cada fragmento de dados).
+
+
+    redis-cli -p 7000
+    127.0.0.1:7000> flushall
+    127.0.0.1:7000> cluster reset
+    127.0.0.1:7000> exit
+
+    redis-cli -p 7001
+    127.0.0.1:7001> flushall
+    127.0.0.1:7001> cluster reset
+    127.0.0.1:7001> exit
+
+    redis-cli --cluster create 127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005 127.0.0.1:7006 127.0.0.1:7007 127.0.0.1:7008 --cluster-replicas 2
+
+
+====================================================================================
+
+3- Crie mais 5 chaves e seus valores, fazendo sharding. Neste exercício, insira na 
+resposta uma imagem em que seja possível ilustrar os dados já alocados em diferentes 
+nós!
+
+127.0.0.1:7000> set first element
+127.0.0.1:7001> set hello bye
+127.0.0.1:7002> set bye bye
+127.0.0.1:7002> set a b
+127.0.0.1:7002> set c d
+
+127.0.0.1:7000> get a
+-> Redirected to slot [15495] located at 127.0.0.1:7002
+"b"
+
+127.0.0.1:7000> get hello
+"bye"
+
+127.0.0.1:7000> get bye
+-> Redirected to slot [15305] located at 127.0.0.1:7002
+"bye"
+
+127.0.0.1:7002> get c
+-> Redirected to slot [7365] located at 127.0.0.1:7001
+"d"
+
+127.0.0.1:7001> get first
+-> Redirected to slot [11149] located at 127.0.0.1:7002
+"element"
+
+
+====================================================================================
+
+4- Verifique os nós do cluster e o estado de cada um (connected, disconnected ou …).
+ Descreva qual nó é subordinado de qual nó coordenador.
+ Como fez para obter a configuração?
+
+    redis-cli -c -p 7000
+
+    127.0.0.1:7000> info
+
+    Que retorna: 
+    
+    # Replication
+        role:master
+        connected_slaves:2
+        slave0:ip=127.0.0.1,port=7008,state=online,offset=2936,lag=0
+        slave1:ip=127.0.0.1,port=7003,state=online,offset=2936,lag=1
+
+Logo, os nos 7008 e 7003 sao slaves do no 7000 (coordenador)
+
+    redis-cli -c -p 7001
+
+    127.0.0.1:7001> info
+
+    Que retorna: 
+        
+    # Replication
+        role:master
+        connected_slaves:2
+        slave0:ip=127.0.0.1,port=7005,state=online,offset=2741,lag=0
+        slave1:ip=127.0.0.1,port=7006,state=online,offset=2741,lag=0
+
+Logo, os nos 7005 e 7006 sao slaves do no 7001 (coordenador)
+
+
+    redis-cli -c -p 7002
+
+    127.0.0.1:7002> info
+
+    Que retorna: 
+    
+    # Replication
+        role:master
+        connected_slaves:2
+        slave0:ip=127.0.0.1,port=7007,state=online,offset=3288,lag=1
+        slave1:ip=127.0.0.1,port=7004,state=online,offset=3288,lag=1
+
+Logo, os nos 7007 e 7004 sao slaves do no 7002 (coordenador)
+
+====================================================================================
+
+5- Forçar failover do 7002 (com erro!!! Por exemplo, "Error: Server closed the connection"). Verifique
+ a realocação automática. Explique o quê aconteceu?
+
+    redis-cli -c -p 7000
+
+    *desliguei no 7002*
+
+    127.0.0.1:7000> get a
+        -> Redirected to slot [15495] located at 127.0.0.1:7004
+        "b"
+
+    Percebemos que o no 7004 tomou a posicao do no 7002 apos o failover, ja que uma requisicao feita
+        ao dado com a chave "a", que antes estava armazenado no no 7002, nos redirecionou para o no 7004
+
+====================================================================================
+
+6- Assumindo que existe uma instância coordenadora na porta 6379 (porta padrão), e uma subordinada em 
+6380. Crie o arquivo sentinel.conf nas portas 5000, 5001, 5002, com a seguinte configuração:
+
+    port 500?
+    sentinel monitor mymaster 127.0.0.1 6379 2
+    sentinel down-after-milliseconds mymaster 5000
+    sentinel failover-timeout mymaster 60000
+    sentinel parallel-syncs mymaster 1
+
+Explique o que é um sentinel e o que significa esta configuração (de preferência faz uma explicação 
+passo a passo acompanhando cada linha inserida no arquivo).
+
+    port 500? - nesta linha especificamos a porta a qual o no deve responder as requisicoes
+
+    sentinel monitor mymaster 127.0.0.1 6379 2
+    
+        nesta linha definimos a qual master o sentinela deve monitorar, especificando seu IP e porta
+
+    sentinel down-after-milliseconds mymaster 5000
+
+        aqui definimos um tempo maximo para o qual o master deste sentinela deve responder as 
+        requisicoes
+
+    sentinel failover-timeout mymaster 60000
+
+        aqui definimos um timeout em milissegundos para quanto tempo o sentinela deve esperar sem 
+        receber resposta de seu master para ativar o failover e definir um novo master
+
+
+    sentinel parallel-syncs mymaster 1
+
+        aqui e definido o numero de sincronismos paralelos que devem ser feitos entre sentinela e
+        seu master 
+
+    
+        Visto isso um sentinela pode ser descrito como uma especie de entidade que "vigia" o sistema
+    (ou um master especifico) procurando por possiveis falhas e definindo o tratamento adequado
+    para elas.
+
+====================================================================================
+
+7- Execute Sentinel para cada porta, usando o código seguinte:
+$ redis-sentinel ./500?/sentinel.conf
+
+E gere failover:       $redis-cli -p 6379 DEBUG sleep 300
+
+Teste:
+    127.0.0.1:5000> $ SENTINEL get-master-addr-by-name mymaster
+    1) "127.0.0.1"
+    2) "6380"
+
+Explique a diferença entre o exercício 5 e 7 em termos de ações pós failover.
+
+====================================================================================
