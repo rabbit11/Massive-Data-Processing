@@ -104,6 +104,7 @@
    
  ### Master/Slave
   O ArangoDB possui a arquitetura *Master/Slave* onde os *Slaves* recebem dados assíncronos de um *Master*. Nos *Slaves* apenas é possível realizar apenas a leitura dos dados, enquanto o *Master* realiza inserções e atualizações dos dados. Na figura 1, pode ser observado ,de modo simplificada, esta arquitetura.
+  
     ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/master-slave1.png)
   
 ### Active Failover
@@ -128,3 +129,43 @@
    
    #### Replicação assíncrona
    A replicação assíncrona é usada principalmente na arquitetura de master/slave, de forma que os slaves conectam-se aos seus respectivos masters e aplicam localmente os eventos já aplicados ao master em mesma ordem, como resultado os slaves terão os dados no mesmo estado que os seus respectivos masters.
+
+## Implementação de Propriedades
+
+  ### Consistência
+   Como ArangoDB é um banco de dados de múltiplos modelos, a consistência dos dados se torna um empecilho, devido a cada um dos modelos não terem sido desenvolvidos para conversarem entre si, o que faz com que se tenha que desenvolver alguma funcionalidade de transação a fim de manter seus dados consistentes através dos diversos modelos suportados.
+   
+   Assim no ArangoDB, há uma única aplicação back-end gerenciando cada modelo de dados com suporte de transações ACID para desse modo manter uma forte consistência tanto em instâncias únicas como em operações atômicas no modo cluster.
+   
+ ### Transações
+  As transações no ArangoDB  são atômicas, consistentes, isoladas e duráveis (ACID). Tais propriedades do ACID fornecem as seguintes garantias para as transações:
+  
+  * A atomicidade faz com que as transações sejam executadas completamente ou não sejam executadas.
+  * A consistência garante que as transações ou alteram o estado para um estado novo e válido em caso de sucesso ou voltam ao estado anterior sem perda dos dados.
+  * O isolamento mantém a transação atual não finalizada sem sofrer alterações de outras transações correntes.
+  * A durabilidade garante que as operações das transações confirmadas sejam mantidas persistentes. Tal durabilidade da transação é configurável no ArangoDB, assim como a durabilidade no nível da coleção.
+  
+### Disponibilidade
+  O grau de disponibilidade do ArangoDB pode ser descrito como de certa forma "flexível", já que depende da forma como ele é configurado. A arquitetura de cluster CP utilizada por essa base de dados em geral prioriza consistência interna em detrimento da disponibilidade. Para amenizar este efeito, o sistema pode ser configurado de forma a utilizar replicação síncrona apenas, o que geraria grandes ganhos em termos de disponibilidade em troca de grande parcela da performance, devida a alta latência gerada por operações de escrita.
+ 
+### Escalabilidade
+   Como o ArangoDB é uma base de dados distribuída em 3 tipos de modelos de dados diferentes, ele pode escalar de maneira horizontal, ou seja, pode se utilizar de diversos servidores. Essa técnica além de resultar em uma maior performance, também gera maior resiliência e melhora em capacidade.
+   
+   Base de dados que podem escalar de maneira horizontal também permitem que sistemas adéquem sua capacidade de processamento e armazenamento de acordo com a demanda, ou seja, durante altas demandas podemos aumentar o número de servidores (aumentando a escala horizontal) e durante momentos de baixa demanda, podemos desalocar alguns nós do sistema de forma a cortar custos.
+   
+   Apesar de todas as vantagens citadas acima sobre escalar o sistema horizontalmente, o ArangoDB também permite que o sistema o escale de maneira vertical, apesar de ser menos eficiente na maior parte dos casos.
+   
+## Quando utilizar ArangoDB
+
+  O ArangoDB por possuir vários tipos de armazenamento de dados, seja em formato de chave/valor, documentos ou grafos, isso traz uma maior performance nas aplicações e uma maior escabilidade horizontal dos dados quando combinados os três formatos. Além disso, é possível em uma única query relacionar os três formatos.
+  
+  Existem três principais situações onde o este banco de dados é extremamente recomendável, que são:
+  
+  * Ao realizar um projeto, pode não se ter todos os requisitos do sistema e de como organizar os dados, assim futuras modificações podem ocorrer na estruturação dos dados. Ao utilizar o ArangoDB não tem essa preocupação, já que possui um modelo de vários formatos de estruturar os dados, é possível alterar os dados de forma fácil para novos casos e novas características de um sistema.
+  * Quando se está desenvolvendo uma aplicação em uma equipe, este banco permite que os times se cooperem através de casos de usos. Por exemplo, um time trabalha na formatação dos dados em chave/valor, enquanto outro pode trabalhar na parte dos grafos e depois trocar experiências e otimizando a usabilidade do sistema. Além disso, permite um time ter uma curva de aprendizado mais rápido.
+  * Neste banco de dados, por ter um incrível sistema de vários formatos de estruturas de dados, é possível também ter uma única query para obtenção dos dados a fim de modular diferentes aplicações. 
+  
+## Quando não utilizar
+
+
+## Referências
