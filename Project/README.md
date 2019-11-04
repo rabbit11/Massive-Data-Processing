@@ -114,3 +114,17 @@
   *  Uma instância chamada de Agency, cuja função é ser uma espécie de testemunha, que decide qual servidor assume a posição de líder, caso alguma falha ocorra.
   
   ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/leader-follower(1).png)
+  
+   A vantagem do uso de Active Failover quando comparada a arquitetura Master/Slave tradicional seria a terceira entidade chamada Agency que observa e está envolvida em todos os processos dos servidores. Followers podem contar com o Agency para determinar se estão conectados ao server Leader correto. Isso faz com que este tipo de arquitetura tenha uma maior resiliência, já que todos os drivers oficiais do ArangoDB são capazes de determinar o servidor Leader corretamente e redirecionar aquela requisição apropriadamente.
+   
+### Cluster
+  A arquitetura de clusters no ArangoDB é CP master/master, o que significa (em termos do teorema CAP) que durante uma falha de conexão entre nós no servidor, este SGBD prioriza consistência interna no lugar de disponibilidade. Além disso uma arquitetura master/master permite que clientes podem mandar requisições de maneira arbitrária para qualquer nó e obter a mesma "visão" dos dados, sem um único ponto de falha, já que o cluster pode ainda servir a requisições mesmo com falhas em algumas máquinas.
+    
+### Replicação
+   A replicação pode ser definida como cópias dos dados de um nó do sistema para outro, de forma a permitir recuperação de falhas, no caso de quedas de conexões entre servidores por exemplo. Para isso o ArangoDB oferece dois tipos de replicação: síncrona e assíncrona.
+   
+   #### Replicação síncrona
+   A replicação síncrona funciona apenas entre servidores dentro de um mesmo cluster, e é normalmente utilizada para operações críticas, onde os dados devem estar disponíveis a todo o momento. Normalmente este tipo de replicação guarda uma cópia de um fragmento dos dados em um ou mais outros servidores. Desta forma as operações de escrita só são devidamente validadas quando todas as réplicas efetuarem aquela operação de escrita, o que aumenta a latência desta operação, porém caso uma falha ocorra logo após a escrita, temos a garantia de que os dados presentes em qualquer uma das réplicas é o dado mais recente.
+   
+   #### Replicação assíncrona
+   A replicação assíncrona é usada principalmente na arquitetura de master/slave, de forma que os slaves conectam-se aos seus respectivos masters e aplicam localmente os eventos já aplicados ao master em mesma ordem, como resultado os slaves terão os dados no mesmo estado que os seus respectivos masters.
