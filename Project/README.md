@@ -104,3 +104,5 @@
    
  ### Master/Slave
   O ArangoDB possui a arquitetura *Master/Slave* onde os *Slaves* recebem dados assíncronos de um *Master*. Nos *Slaves* apenas é possível realizar apenas a leitura dos dados, enquanto o *Master* realiza inserções e atualizações dos dados. Na figura 1, pode ser observado ,de modo simplificada, esta arquitetura.
+  ![Master/Slave Architecture](https://drive.google.com/open?id=1b0zWox_t3lW2kb2s1jRh2USgtc4-xs-r)
+  
