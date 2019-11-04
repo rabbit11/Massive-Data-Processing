@@ -104,5 +104,13 @@
    
  ### Master/Slave
   O ArangoDB possui a arquitetura *Master/Slave* onde os *Slaves* recebem dados assíncronos de um *Master*. Nos *Slaves* apenas é possível realizar apenas a leitura dos dados, enquanto o *Master* realiza inserções e atualizações dos dados. Na figura 1, pode ser observado ,de modo simplificada, esta arquitetura.
-  ![Master/Slave Architecture](https://drive.google.com/open?id=1b0zWox_t3lW2kb2s1jRh2USgtc4-xs-r)
+    ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/master-slave1.png)
   
+### Active Failover
+  Uma arquitetura de *Active Failover* possui as seguintes características:
+  
+  * Uma instância chamada de Leader que clientes podem realizar operações de leitura e escrita.
+  * Ao menos uma instância chamada de Follower, que clientes podem realizar apenas operações de leitura, essas instâncias replicam os dados do Leader de maneira assíncrona.
+  *  Uma instância chamada de Agency, cuja função é ser uma espécie de testemunha, que decide qual servidor assume a posição de líder, caso alguma falha ocorra.
+  
+  ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/leader-follower(1).png)
