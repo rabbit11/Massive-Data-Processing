@@ -167,5 +167,47 @@
   
 ## Quando não utilizar
 
+## Parte Prática
+  Agora que já cobrimos a parte teórica, nesta seção iremos dar a você o passo a passo de como utilizar o ArangoDB para criar um cluster com 3 nós (sendo cada computador um nó diferente) na arquitetura Master/Slave.
+  
+## Configuração
+  ### Criação do cluster
+  Primeiro devemos configurar aquele nó que inicialmente será o Master, podemos escolher qualquer nó arbitrariamente. O seguinte comando inicia uma instância do arangodb, define um diretório no qual os arquivos armazenados dentro da base de dados deverão ser salvos, e a porta a qual os outros nós devem se conectar. E então no terminal do futuro nó que escolhemos, devemos executar o seguinte comando:
+    ```
+      arangodb --starter.data-dir=./db1 --starter.port="8530"
+    ```
+  E devemos receber uma mensagem de sucesso como: ArangoDB Starter listening on 0.0.0.0:8530.
+  
+  Após esta mensagem de sucesso, devemos executar o seguinte comando no terminal do segundo computador:
+   ```
+      arangodb --starter.data-dir=./db2 --starter.port="8530" --starter.join 192.168.15.6:8530
+   ```
+   
+   Devemos então receber uma mensagem de sucesso semelhante a primeira. Este comando executado define o diretório onde os dados daquele nó deverão ser armazenados, a porta a qual outros nós devem se conectar a ele, e o IP e porta do nó o qual ele deve se conectar (no caso seria o IP do computador o qual executamos o primeiro comando, substitua "192.168.15.6" pelo IP do primeiro computador).
+   
+   Após esta mensagem de sucesso, devemos executar um comando similar no terminal do terceiro computador:
+   ```
+      arangodb --starter.data-dir=./db2 --starter.port="8530" --starter.join 192.168.15.6:8530
+   ```
+  Devemos então receber uma mensagem de sucesso e o endereço de IP e porta que deveremos acessar em nosso browser para acessar a interface do ArangoDB. Normalmente deve ser algo semelhante à: 0.0.0.0:8529
+  
+  ### Configuração do Banco de Dados
+   Após acessar a interface web do ArangoDB, devemos selecionar o DB System e e clickar em *Select DB:_system*, como nesta imagem:
+   
+   E então veremos uma tela semelhante à essa:
+   
+   Iremos então para a aba *Database* e clickar em *Add Database*, que então gerará esta tela:
+   
+   Neste caso daremos o nome de Restaurants para o nosso database.
+   
+   Após isso devemos clickar nas setas brancas no topo da página, ao lado de *DB:_System*. Que então nos redirecionará a tela inicial, onde desta vez devemos escolher o database Restaurants e clickar no botão *Select DB: Restaurants*.
+   
+   Então deveremos acessar a aba Collections e adicionar uma nova coleção chamada *restaurants*, alterando as seguintes opções:
+    * Number of shards: 1
+    * Replication Factor: 3
+    
+   Isso irá permitir que a replicação seja realizada em nosso banco.
+   
+  ### Inserção de dados na coleção Restaurants
 
 ## Referências
