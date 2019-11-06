@@ -31,22 +31,28 @@
   
                  AQL                                                                SQL
   
-   ```                                                                  
+   ```                                                                 
    INSERT { name: "John Doe", gender: "m" }                             INSERT INTO users (name,gender)
-        INTO users                                                      VALUES ('John Doe','m');
+        INTO users                                                      VALUES ("John Doe","m");
    ```
    
   #### Atualização de documento:
+  
+                AQL                                                                 SQL
+  
   ```
-   UPDATE { _key: "1" }
-       WITH { name: "John Smith" }
-       IN users 
+   UPDATE { _key: "1" }                                                 UPDATE users
+       WITH { name: "John Smith" }                                      SET name = "John Smith"
+       IN users                                                         WHERE Id = 1
   ```
   
   #### Remoção de documento:
+  
+                AQL                                                                 SQL           
+  
   ```
-   REMOVE \{ \_key:"value" \} 
-              IN collections
+   REMOVE \{ \_key:"value" \}                                            DELETE FROM users
+              IN collections                                             WHERE id = "value";
   ```
   
   #### Seleção de documentos:
