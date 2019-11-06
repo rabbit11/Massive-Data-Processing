@@ -231,6 +231,8 @@
   
 ## Quando não utilizar
 
+  O uso do ArangoDB não é recomendado em situações em que um cluster é configurado em esquema Master/Slave no qual seja estritamente necessário o não acesso dos slaves à operações de escrita, devido a existir tal limitação no sistema nesse caso.
+
 ## Parte Prática
   Agora que já cobrimos a parte teórica, nesta seção iremos dar a você o passo a passo de como utilizar o ArangoDB para criar um cluster com 3 nós (sendo cada computador um nó diferente) na arquitetura Master/Slave.
   
