@@ -12,7 +12,7 @@
         
    Assumiremos que o SnapCraft já está instalado (caso não esteja, o link para instalação é este: 
                   https://snapcraft.io/docs/installing-snap-on-fedora).
-   Abrimos um terminal e usamos o comando "sudo snap install arangodb3", digitamos a senha do sudo e esperamos o download e posterior instalação a serem executadas pelo comando.
+   Abrimos um terminal e usamos o comando "sudo snap install arangodb3", digitamos a senha do sudo e esperamos o download e posterior instalação a serem executadas pelo comando. A versão instalada, neste caso, é a mais recente, a 3.5.
         
    Ao terminar a instalação, o servidor ArangoDB já estará rodando em sua máquina pronto para ser acessado.
    
@@ -21,10 +21,19 @@
   Para acessar o servidor entramos no browser e acessamos a seguinte url: http://127.0.0.1:8529, a qual é aponta para a definição padrão de url e porta para o servidor ArangoDB. Nessa página, temos que fazer login, o qual faremos com o usuário "root" que é o já criado como padrão para o servidor.
   
 ## Comandos Básicos
+  ### Nesta seção é exemplificado o uso da linguagem AQL, que é a usada no ArangoDB, para alguns comando básicos e vamos comparar suas estruturas com a SQL.
+  
+  #### Terminologia
+  
+  ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/terminologia.png)
+  
   #### Inserção de documento:
-   ``` 
-   INSERT { name: "John Doe", gender: "m" }
-        INTO users
+  
+                 AQL                                                                SQL
+  
+   ```                                                                  
+   INSERT { name: "John Doe", gender: "m" }                             INSERT INTO users (name,gender)
+        INTO users                                                      VALUES ('John Doe','m');
    ```
    
   #### Atualização de documento:
