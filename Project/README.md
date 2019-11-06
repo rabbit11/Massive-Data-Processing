@@ -15,7 +15,7 @@
    Assumiremos que o SnapCraft já está instalado (caso não esteja, o link para instalação é este: 
                   https://snapcraft.io/docs/installing-snap-on-fedora).
    Abrimos um terminal e usamos o comando "sudo snap install arangodb3", digitamos a senha do sudo e esperamos o download e posterior instalação a serem executadas pelo comando. A versão instalada, neste caso, é a mais recente, a 3.5.
-   ### MacOS
+   ### MacOs
    Já no sistema operacional MacOS, podemos utilizar o seguinte comando para instalar o ArangoDB, no terminal:
    ```
    brew install arangodb
@@ -313,9 +313,27 @@
    Supondo que o IP depois de *--starter.join* seja o IP daquele nó que foi eleito como master.
    
  ## Exercícios para praticar
- 1. 
+ Nesta seção, selecionamos alguns exercícios para praticar a AQL.
+ ```
+ 1. Escreva uma consulta para inserir o restaurante "Oliver Garden", bairro "Itaim Bibi" e gastronomia "Italian".
+ ```
+ ```
+ 2. Escreva uma consulta para atualizar a gastronomia do restaurante "Oliver Garden" para "Brazilian" 
+ ```
+ ```
+ 3. Escreva uma consulta para remover o restaurante "Oliver Garden".
+ ```
+ ```
+ 4. Escreva uma consulta para retornar os campos nome do restaurante, bairro, gastronomia e endereço dos restaurantes que estão no bairro "Brooklin".
+ ```
+ ```
+ 5. Escreva uma consulta para retornar os campos nome do restaurante, bairro, gastronomia e endereço dos restaurantes que estão no bairro "Queens" de forma que o nome dos restaurantes estejam em ordem crescente.
+ ```
+ ```
+ 6. Escreva uma consulta que conta quantos restaurantes existem por bairro.
+ ```
    
 ## Referências
 
-  [1]. ArangoDB. Documentaçao completa. Página inicial. Disponível em: <https://www.arangodb.com/>. Acesso em: 11 de Out. de 2019.
+  [1] ArangoDB. Documentaçao completa. Página inicial. Disponível em: <https://www.arangodb.com/>. Acesso em: 11 de Out. de 2019.
 
