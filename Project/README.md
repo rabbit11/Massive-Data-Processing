@@ -8,12 +8,14 @@
   Como ArangoDB é native multi-model é possível realizar consultas combinando padrões de acesso a diferentes tipos de dados em uma única consulta, assim possibilitando consultas que relacionem os dados armazenados nos diferentes modelos.
   
   ## Instalação
-  Devido a escolha do sistema operacional ser Fedora e pela falta de suporte da aplicação por meio do site oficial para versões mais recentes do SO, iremos instalar por meio do SnapCraft.
+  
+   ## Fedora
+   Devido a falta de suporte da aplicação por meio do site oficial para versões mais recentes do SO, iremos instalar por meio do SnapCraft.
         
    Assumiremos que o SnapCraft já está instalado (caso não esteja, o link para instalação é este: 
                   https://snapcraft.io/docs/installing-snap-on-fedora).
    Abrimos um terminal e usamos o comando "sudo snap install arangodb3", digitamos a senha do sudo e esperamos o download e posterior instalação a serem executadas pelo comando. A versão instalada, neste caso, é a mais recente, a 3.5.
-   
+   ## MacOs
    Já no sistema operacional MacOS, podemos utilizar o seguinte comando para instalar o ArangoDB, no terminal:
    ```
    brew install arangodb
