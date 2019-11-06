@@ -24,20 +24,35 @@
   ### Nesta seção é exemplificado o uso da linguagem AQL, que é a usada no ArangoDB, para alguns comando básicos e vamos comparar suas estruturas com a SQL.
   
   #### Terminologia
+  Na figura abaixo, há a comparação dos termos a linguagem SQL e AQL.
   
   ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/terminologia.png)
   
+  #### Estrutura básica da AQL
+  | Cláusula         | SQL         | Significado                                             |
+|------------------|-------------|---------------------------------------------------------|
+| Filter           | Where       | Define condições para os resultados de retorno          |
+| For...return     | Select      | Define quais colunas serão selecionadas na consulta     |
+| With <agregação> | <agregação> | Define quais função de agregação fará parte da consulta |
+| Collect          | Group by    | Define quais campos serão agrupados                     |
+| Sort             | Order by    | Define quais campos serão ordenados                     |
+| Insert           | Insert      | Insere campo(s) na coleção                              |
+| Update           | Update      | Atualiza campo(s) na coleção                            |
+| Remove           | Delete      | Deleta campo(s) na coleção                              |
+
+  
   #### Inserção de documento:
-  
-                 AQL                                                                SQL
-  
+  No exemplo abaixo, vamos inserir dentro da tabela Users o nome John Doe e coocando o gender m também.
+ 
+                  AQL                                                                SQL
+   
    ```                                                                 
    INSERT { name: "John Doe", gender: "m" }                             INSERT INTO users (name,gender)
         INTO users                                                      VALUES ("John Doe","m");
    ```
    
   #### Atualização de documento:
-  
+  No exemplo abaixo, vamos atualizar o campo name para John Smith onde este tem id(SQL) ou key(AQL) igual a 1 na tabela de users.
                 AQL                                                                 SQL
   
   ```
@@ -47,15 +62,16 @@
   ```
   
   #### Remoção de documento:
-  
+  No exemplo abaixo, vamos excluir os dados que tem no campo id(SQL) ou key(AQL), value, da tabela users.
                 AQL                                                                 SQL           
   
   ```
-   REMOVE { _key:"value" }                                              DELETE FROM users
-              IN collections                                             WHERE id = "value";
+   REMOVE \{ \_key:"value" \}                                            DELETE FROM users
+              IN users                                                   WHERE id = "value";
   ```
   
   #### Seleção de documentos:
+  No exemplo abaixo, vamos selecionar todos os dados da tabela.
   
                 AQL                                                                 SQL
   
@@ -65,6 +81,7 @@
   ```
   
   #### Filtro de documentos em seleção:
+  No exemplo abaixo, vamos selectionar o firstname e o lastname concatenados e o gender, onde o campo active for igual a 1 da tabela users.
   
                 AQL                                                                 SQL
   
@@ -79,6 +96,7 @@
   ```
   
   #### Ordenação de documentos numa seleção:
+  No exemplo baixo, vamos selecionar todos os dados onde tiverem o campo active igual a 1 e ordenados de forma crescente por name e gender.
   
                 AQL                                                                 SQL
   
@@ -90,6 +108,7 @@
  ```
  
  #### Contagem de documentos de uma coleção:
+ No exemplo abaixo, vamos selecionar o agrupamgento do gender e quantos dados existem com aquele gender onde o campo active for igual a 1.
  
                 AQL                                                                 SQL
   
@@ -105,6 +124,7 @@
  ```
  
  #### Agrupamento de documentos de uma coleção:
+ 
  
                 AQL                                                                 SQL
   
@@ -277,6 +297,9 @@
    arangodb --starter.data-dir=./db1 --starter.port="8530" --starter.join 192.168.15.6:8530
    ```
    Supondo que o IP depois de *--starter.join* seja o IP daquele nó que foi eleito como master.
+   
+ ## Exercícios para praticar
+ 1. 
    
 ## Referências
 
