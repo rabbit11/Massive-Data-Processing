@@ -41,7 +41,7 @@
   ### Nesta seção é exemplificado o uso da linguagem AQL, que é a usada no ArangoDB, para alguns comando básicos e vamos comparar suas estruturas com a SQL.
   
   #### Terminologia
-  Na figura abaixo, há a comparação dos termos a linguagem SQL e AQL.
+  Na figura abaixo, há a comparação dos termos entre a linguagem SQL e AQL.
   
   ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/terminologia.png)
   
@@ -61,7 +61,7 @@
 
   
   #### Inserção de documento:
-  No exemplo abaixo, vamos inserir dentro da tabela Users, o nome John Doe do genêro masculino (m).
+  No exemplo abaixo, vamos inserir dentro da tabela Users, o nome John Doe do gênero masculino (m).
  
                   AQL                                                                SQL
    
@@ -82,7 +82,7 @@
   ```
   
   #### Remoção de documento:
-  No exemplo abaixo, vamos excluir os dados que tem no campo id(SQL) ou key(AQL), value, da tabela users.
+  No exemplo abaixo, vamos excluir os dados que tem no campo id(SQL) ou key(AQL) o valor igual a "value", da tabela users.
   
                 AQL                                                                 SQL           
   
@@ -102,7 +102,7 @@
   ```
   
   #### Filtro de documentos em seleção:
-  No exemplo abaixo, vamos selecionar o primeiro nome e o sobrenome concatenados e o genÊro, onde o campo active for igual a 1 da tabela users.
+  No exemplo abaixo, vamos selecionar o primeiro nome e o sobrenome concatenados e o gênero, onde o campo active for igual a 1 da tabela users.
   
                 AQL                                                                 SQL
   
@@ -117,7 +117,7 @@
   ```
   
   #### Ordenação de documentos numa seleção:
-  No exemplo baixo, vamos selecionar todos os dados onde tiverem o campo active igual a 1 e ordenados de forma crescente por nome e genêro.
+  No exemplo baixo, vamos selecionar todos os dados onde tiverem o campo active igual a 1 e ordenados de forma crescente por nome e gênero.
   
                 AQL                                                                 SQL
   
@@ -129,7 +129,7 @@
  ```
  
  #### Contagem de documentos de uma coleção:
- No exemplo abaixo, vamos selecionar o agrupamgento do genÊro e quantos dados existem com aquele genÊro onde o campo active for igual a 1.
+ No exemplo abaixo, vamos selecionar o agrupamgento do gênero e quantos dados existem com aquele gênero onde o campo active for igual a 1.
  
                 AQL                                                                 SQL
   
@@ -169,9 +169,9 @@
  #### Nesta seção serão exemplicados todos os tipos de arquitetura presentes no ArangoDB.
  
  ### Single Instance
-   *Single Instance* é a arquitetura mais simples que existe neste banco de dados. Ao utilizar esta arquitetura sozinha, não existirá métodos de replicações, sem oportunidades de *failover* e nenhum *cluster* com outros nós.
+   *Single Instance* é a arquitetura mais simples que existe neste banco de dados. Ao utilizar esta arquitetura sozinha, não existirá métodos de replicações, oportunidades de *failover* e nenhum *cluster* com outros nós.
    
-   Mesmo sem todos os recursos citados anteriormente, é possível rodar múltiplos processos na mesma máquina com esta arquitetura, contudo que as portas e os dados sejam configurados diferentemente.
+   Mesmo sem todos os recursos citados anteriormente, é possível rodar múltiplos processos na mesma máquina com esta arquitetura, contanto que as portas e os dados sejam configurados diferentemente.
    
  ### Master/Slave
   O ArangoDB possui a arquitetura *Master/Slave* onde os *Slaves* recebem dados assíncronos de um *Master*. Nos *Slaves* apenas é possível realizar apenas a leitura dos dados, enquanto o *Master* realiza inserções e atualizações dos dados. Na figura 1, pode ser observado ,de modo simplificada, esta arquitetura.
@@ -352,5 +352,5 @@
    
 ## Referências
 
-  [1] ArangoDB. Documentaçao completa. Página inicial. Disponível em: <https://www.arangodb.com/>. Acesso em: 11 de Out. de 2019. </br>
+  [1] ArangoDB. Documentaçao completa. Página inicial. Disponível em: <https://www.arangodb.com/>. Acesso em: 11 de Out. de 2019.
   [2] ArangoDB. Master/Slave Limitations. Disponível em: <https://www.arangodb.com/docs/3.5/architecture-deployment-modes-master-slave-limitations.html>. Acesso em: 03 de Nov. de 2019
