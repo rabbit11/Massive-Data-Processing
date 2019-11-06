@@ -352,5 +352,5 @@
    
 ## Referências
 
-  [1] ArangoDB. Documentaçao completa. Página inicial. Disponível em: <https://www.arangodb.com/>. Acesso em: 11 de Out. de 2019.
+  [1] ArangoDB. Documentaçao completa. Página inicial. Disponível em: <https://www.arangodb.com/>. Acesso em: 11 de Out. de 2019. </br>
   [2] ArangoDB. Master/Slave Limitations. Disponível em: <https://www.arangodb.com/docs/3.5/architecture-deployment-modes-master-slave-limitations.html>. Acesso em: 03 de Nov. de 2019
