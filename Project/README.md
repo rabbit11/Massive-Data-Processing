@@ -59,7 +59,6 @@
 | Insert           | Insert      | Insere campo(s) na coleção                              |
 | Update           | Update      | Atualiza campo(s) na coleção                            |
 | Remove           | Delete      | Deleta campo(s) na coleção                              |
-</br>
 **Tabela 1: Compração entre cláusulas**
   
   #### Inserção de documento:
