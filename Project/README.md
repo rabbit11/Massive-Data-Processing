@@ -43,7 +43,7 @@
   #### Terminologia
   Na figura abaixo, há a comparação dos termos entre a linguagem SQL e AQL.
   
-  <center>![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/terminologia.png)</center>
+  ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/terminologia.png)</br>
   **Figura 1: Comparação SQL e AQL** 
   
   #### Estrutura básica da AQL
@@ -59,7 +59,8 @@
 | Insert           | Insert      | Insere campo(s) na coleção                              |
 | Update           | Update      | Atualiza campo(s) na coleção                            |
 | Remove           | Delete      | Deleta campo(s) na coleção                              |
-
+</br>
+**Tabela 1: Compração entre cláusulas**
   
   #### Inserção de documento:
   No exemplo abaixo, vamos inserir dentro da tabela Users, o nome John Doe do gênero masculino (m).
