@@ -178,7 +178,7 @@
   
    ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/master-slave1.png)
   
-  Nota: Devido algumas limitações na implementação do ArangoDB, o slave pode realizar alterações na base de dados, mesmo isso sendo incorreto conceitualmente. Isso pode ser lido em mais detalhes no seguinte link: https://www.arangodb.com/docs/3.5/architecture-deployment-modes-master-slave-limitations.html
+  Nota: Devido algumas limitações na implementação do ArangoDB, o slave pode realizar alterações na base de dados, mesmo isso sendo incorreto conceitualmente.[2]
   
 ### Active Failover
   Uma arquitetura de *Active Failover* possui as seguintes características:
@@ -353,4 +353,5 @@
 ## Referências
 
   [1] ArangoDB. Documentaçao completa. Página inicial. Disponível em: <https://www.arangodb.com/>. Acesso em: 11 de Out. de 2019.
+  
   [2] ArangoDB. Master/Slave Limitations. Disponível em: <https://www.arangodb.com/docs/3.5/architecture-deployment-modes-master-slave-limitations.html>. Acesso em: 03 de Nov. de 2019
