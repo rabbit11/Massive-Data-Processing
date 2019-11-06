@@ -53,6 +53,7 @@
    
   #### Atualização de documento:
   No exemplo abaixo, vamos atualizar o campo name para John Smith onde este tem id(SQL) ou key(AQL) igual a 1 na tabela de users.
+  
                 AQL                                                                 SQL
   
   ```
@@ -63,6 +64,7 @@
   
   #### Remoção de documento:
   No exemplo abaixo, vamos excluir os dados que tem no campo id(SQL) ou key(AQL), value, da tabela users.
+  
                 AQL                                                                 SQL           
   
   ```
