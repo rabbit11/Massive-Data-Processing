@@ -58,7 +58,8 @@
 | Sort             | Order by    | Define quais campos serão ordenados                     |
 | Insert           | Insert      | Insere campo(s) na coleção                              |
 | Update           | Update      | Atualiza campo(s) na coleção                            |
-| Remove           | Delete      | Deleta campo(s) na coleção                              |</br>
+| Remove           | Delete      | Deleta campo(s) na coleção                              |
+
 **Tabela 1: Compração entre cláusulas**
   
   #### Inserção de documento:
@@ -178,6 +179,7 @@
   O ArangoDB possui a arquitetura *Master/Slave* onde os *Slaves* recebem dados assíncronos de um *Master*. Nos *Slaves* apenas é possível realizar apenas a leitura dos dados, enquanto o *Master* realiza inserções e atualizações dos dados. Na figura 1, pode ser observado ,de modo simplificada, esta arquitetura.
   
    ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/master-slave1.png)
+   **Figura 2: Arquitetura Master/Slave**
   
   Nota: Devido algumas limitações na implementação do ArangoDB, o slave pode realizar alterações na base de dados, mesmo isso sendo incorreto conceitualmente.[2]
   
@@ -189,6 +191,7 @@
   *  Uma instância chamada de Agency, cuja função é ser uma espécie de testemunha, que decide qual servidor assume a posição de líder, caso alguma falha ocorra.
   
   ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/leader-follower(1).png)
+  **Figura 3: Arquitetura failover**
   
    A vantagem do uso de Active Failover quando comparada a arquitetura Master/Slave tradicional seria a terceira entidade chamada Agency que observa e está envolvida em todos os processos dos servidores. Followers podem contar com o Agency para determinar se estão conectados ao server Leader correto. Isso faz com que este tipo de arquitetura tenha uma maior resiliência, já que todos os drivers oficiais do ArangoDB são capazes de determinar o servidor Leader corretamente e redirecionar aquela requisição apropriadamente.
    
@@ -274,24 +277,29 @@
    Após acessar a interface web do ArangoDB, devemos selecionar o DB System e e clickar em *Select DB:_system*, como nesta imagem:
    
    ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/selectDB-system-arangodb.jpeg?raw=true)
+   **Figura 4: Tela inicial DB:System**
    
    E então veremos uma tela semelhante à essa:
    
    ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/dashboard-arangodb.jpeg?raw=true)
+   **Figura 5: Web interface**
    
-   Iremos então para a aba *Database* e clickar em *Add Database*, que então gerará esta tela:
+   Iremos então para a aba *Database* e clicar em *Add Database*, que então gerará esta tela:
    
    ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/createdb-arangodb.jpeg?raw=true)
+   **Figura 5: Adicionando banco de dados**
    
    Neste caso daremos o nome de Restaurants para o nosso database.
    
    Após isso devemos clicar nas setas brancas no topo da página, ao lado de *DB:_System*. Como mostrado na figura a seguir:
    
    ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/troca.png?raw=true)
+   **Figura 1: Trocar de banco**
    
-   Ao clicar seremos redirecionados a tela inicial, onde desta vez devemos escolher o database Restaurants e clickar no botão *Select DB: Restaurants*.
+   Ao clicar seremos redirecionados a tela inicial, onde desta vez devemos escolher o database Restaurants e clicar no botão *Select DB: Restaurants*.
    
    ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/restaurants.png?raw=true)
+   **Figura 1: Selecionando Restaurants**
    
    Então deveremos acessar a aba Collections e adicionar uma nova coleção chamada *restaurants*, alterando as seguintes opções:
    
