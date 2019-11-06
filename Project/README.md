@@ -227,8 +227,9 @@
    Após isso devemos clickar nas setas brancas no topo da página, ao lado de *DB:_System*. Que então nos redirecionará a tela inicial, onde desta vez devemos escolher o database Restaurants e clickar no botão *Select DB: Restaurants*.
    
    Então deveremos acessar a aba Collections e adicionar uma nova coleção chamada *restaurants*, alterando as seguintes opções:
-    * Number of shards: 1
-    * Replication Factor: 3
+   
+   * Number of shards: 1
+   * Replication Factor: 3
     
    Isso irá permitir que a replicação seja realizada em nosso banco.
    
