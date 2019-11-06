@@ -17,7 +17,8 @@
                   https://snapcraft.io/docs/installing-snap-on-fedora).
    
    Abrimos um terminal e utilizamos o seguinte comando:
-   ```sudo snap install arangodb3
+   ```
+   sudo snap install arangodb3
    ```
    e esperamos o download e posterior instalação a serem executadas pelo comando.
    ### MacOS
