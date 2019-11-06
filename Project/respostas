@@ -1,0 +1,60 @@
+/* Respostas */
+
+1. Escreva uma consulta para inserir o restaurante "Oliver Garden", bairro "Itaim Bibi" e gastronomia "Italian".
+
+R: INSERT {name: "Oliver Garden", cuisine: "Italian", borough: "Itam Bibi"} INTO restaurants
+
+----------------------------------------------------------------------------
+
+2. Escreva uma consulta para atualizar a gastronomia do restaurante "Oliver Garden", para "Brazilian"
+
+R: UPDATE {_key: "109370"}
+    WITH {cuisine : "Brazilian"}
+    IN restaurants
+
+----------------------------------------------------------------------------
+
+3. Escreva uma consulta para remover o restaurante "Oliver Garden".
+
+R:	REMOVE {_key: "109370"}
+	IN restaurants
+
+----------------------------------------------------------------------------
+
+4. Escreva uma consulta para retornar os campos nome do restaurante, bairro, gastronomia e endereço dos restaurantes que estão no bairro "Brooklin".
+
+R: for i in restaurants
+    filter i.borough == "Brooklyn"
+    return {
+        name: i.name,
+        address: i.address,
+        borough: i.borough,
+        cuisine: i.cuisine
+    }
+
+----------------------------------------------------------------------------
+
+5. Escreva uma consulta para retornar os campos nome do restaurante, bairro, gastronomia e endereço dos restaurantes que estão no bairro "Queens" de forma que o nome dos restaurantes estejam em ordem crescente.
+
+R: for i in restaurants
+    filter i.borough == "Queens"
+    sort i.name
+    return {
+        name: i.name,
+        address: i.address,
+        borough: i.borough,
+        cuisine: i.cuisine
+    }
+
+-------------------------------------------------------------------------------
+
+6. Escreva uma consulta que conta quantos restaurantes existem por bairro.
+
+R: FOR i IN restaurants
+  	COLLECT borough = i.borough
+    WITH COUNT INTO number
+  	RETURN { 
+    bairro: borough, 
+    number: number 
+  }
+
