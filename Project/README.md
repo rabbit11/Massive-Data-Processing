@@ -5,17 +5,16 @@
 ## Visão Geral
   ArangoDB é um NoSQL, native multi-model, SGBD (Sistema de Gerenciamento de Banco de Dados), o que significa que ele une 3 tipos de modelos de dados dentro de seu núcleo, sendo eles: chave-valor, documentos e grafos. Isso permite que usuários possam armazenar seus dados em qualquer um destes modelos e utilizar apenas uma linguagem declarativa para consultas, inserções, remoções e alterações na base de dados.
         
-  Como ArangoDB é native multi-model é possível realizar consultas combinando padrões de acesso a diferentes tipos de dados em uma única consulta, assim possibilitando consultas que relacionem os dados armazenados nos diferentes modelos.
+  Como ArangoDB é nativo multi-model é possível realizar consultas combinando padrões de acesso a diferentes tipos de dados em uma única consulta, assim possibilitando consultas que relacionem os dados armazenados nos diferentes modelos.
   
   ## Instalação
   Nesta seção iremos explicar como foi feita a instalação nos sistemas operacionais Linux e MacOS.
   
-   ### Linux (Fedora)
+   ### Fedora
    Devido a falta de suporte da aplicação por meio do site oficial para versões mais recentes do SO, iremos instalar por meio do SnapCraft.
         
    Assumiremos que o SnapCraft já está instalado (caso não esteja, o link para instalação é este: 
                   https://snapcraft.io/docs/installing-snap-on-fedora).
-   
    Abrimos um terminal e usamos o comando "sudo snap install arangodb3", digitamos a senha do sudo e esperamos o download e posterior instalação a serem executadas pelo comando. A versão instalada, neste caso, é a mais recente, a 3.5.
    ### MacOs
    Já no sistema operacional MacOS, podemos utilizar o seguinte comando para instalar o ArangoDB, no terminal:
@@ -39,7 +38,7 @@
   #### Terminologia
   Na figura abaixo, há a comparação dos termos a linguagem SQL e AQL.
   
-  ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/terminologia.png)
+  ![Teste](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/terminologia.png)
   
   #### Estrutura básica da AQL
   Na tabela abaixo, podemos ver algumas cláusulas do AQL comparadas com a SQL e qual o significado de cada um.
