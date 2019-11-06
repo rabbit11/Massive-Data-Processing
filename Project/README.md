@@ -56,36 +56,48 @@
   ```
   
   #### Seleção de documentos:
+  
+                AQL                                                                 SQL
+  
   ```
-   FOR user IN users
+   FOR user IN users                                                      SELECT * FROM users;                               
               RETURN user
   ```
   
   #### Filtro de documentos em seleção:
+  
+                AQL                                                                 SQL
+  
   ```
-  FOR user IN users
-              FILTER user.active == 1
-              RETURN {
-                name: CONCAT(user.firstName, " ",
+  FOR user IN users                                        SELECT CONCAT(firstName, " ", lastName)
+              FILTER user.active == 1                             AS name, gender
+              RETURN {                                     FROM users
+                name: CONCAT(user.firstName, " ",          WHERE active = 1;
                              user.lastName),
                 gender: user.gender
               }
   ```
   
   #### Ordenação de documentos numa seleção:
- ```
-  FOR user IN users
-              FILTER user.active == 1
-              SORT user.name, user.gender
+  
+                AQL                                                                 SQL
+  
+  ```
+  FOR user IN users                                                         SELECT * FROM users                  
+              FILTER user.active == 1                                       WHERE active = 1
+              SORT user.name, user.gender                                   ORDER BY name, gender;
               RETURN user
  ```
  
  #### Contagem de documentos de uma coleção:
- ```
- FOR user IN users
-              FILTER user.active == 1
-              COLLECT gender = user.gender 
-                WITH COUNT INTO number
+ 
+                AQL                                                                 SQL
+  
+  ```
+ FOR user IN users                                              SELECT gender, COUNT(*) AS number 
+              FILTER user.active == 1                           FROM users
+              COLLECT gender = user.gender                      WHERE active = 1
+                WITH COUNT INTO number                          GROUP BY gender;
               RETURN { 
                 gender: gender, 
                 number: number 
@@ -93,14 +105,17 @@
  ```
  
  #### Agrupamento de documentos de uma coleção:
- ```
-  FOR user IN users
-            FILTER user.active == 1
-            COLLECT
-              year = DATE_YEAR(user.dateRegistered), 
-              month = DATE_MONTH(user.dateRegistered) 
-              WITH COUNT INTO number
-              FILTER number > 20
+ 
+                AQL                                                                 SQL
+  
+  ```
+  FOR user IN users                                           SELECT YEAR(dateRegistered) as year,
+            FILTER user.active == 1                                  MONTH(dateRegistered) as month,
+            COLLECT                                                  COUNT(*) as number
+              year = DATE_YEAR(user.dateRegistered),          FROM users
+              month = DATE_MONTH(user.dateRegistered)         WHERE active = 1
+              WITH COUNT INTO number                          GROUP BY name, gender
+              FILTER number > 20                              HAVING number > 20;
               RETURN {
                 year: year, 
                 month: month, 
@@ -182,6 +197,8 @@
   * Quando se está desenvolvendo uma aplicação em uma equipe, este banco permite que os times se cooperem através de casos de usos. Por exemplo, um time trabalha na formatação dos dados em chave/valor, enquanto outro pode trabalhar na parte dos grafos e depois trocar experiências e otimizando a usabilidade do sistema. Além disso, permite um time ter uma curva de aprendizado mais rápido.
   * Neste banco de dados, por ter um incrível sistema de vários formatos de estruturas de dados, é possível também ter uma única query para obtenção dos dados a fim de modular diferentes aplicações. 
   
+  Empresas que utilizam o ArangoDb são: Barclays, Cisco, Thomson Reuters, Kabbage, Kaseware, entre outras.
+  
 ## Quando não utilizar
 
 ## Parte Prática
@@ -233,6 +250,8 @@
     
    Isso irá permitir que a replicação seja realizada em nosso banco.
    
+   Nota: Essa opções para colocar a quantidade de replicação e o fator só podem ser feitos quando existe um ou mais slaves.
+   
   ## Inserção de dados na coleção Restaurants
    Ao acessar nossa collection Restaurants, podemos visualizar um botão chamado de import, onde iremos inserir o arquivo json que você encontra neste link: https://drive.google.com/file/d/1AvvqCcpD64Rg1ckVX-4GoJ9eRJXg7sj8/view. Aguarde alguns minutos após a confirmação até que o banco importe todos os dados (essa operação pode ser demorada, pois este arquivo possui milhares de documentos).
    
@@ -260,3 +279,6 @@
    Supondo que o IP depois de *--starter.join* seja o IP daquele nó que foi eleito como master.
    
 ## Referências
+
+  [1]. ArangoDB. Documentaçao completa. Página inicial. Disponível em: <https://www.arangodb.com/>. Acesso em: 11 de Out. de 2019.
+
