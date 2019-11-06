@@ -44,7 +44,7 @@
   Na figura abaixo, há a comparação dos termos entre a linguagem SQL e AQL.
   
   ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/terminologia.png)</br>
-  **Figura 1: Comparação SQL e AQL ** 
+  **Figura 1: Comparação SQL e AQL** 
   
   #### Estrutura básica da AQL
   Na tabela abaixo, podemos ver algumas cláusulas do AQL comparadas com a SQL e qual o significado de cada um.
