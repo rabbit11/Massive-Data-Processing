@@ -13,6 +13,12 @@
    Assumiremos que o SnapCraft já está instalado (caso não esteja, o link para instalação é este: 
                   https://snapcraft.io/docs/installing-snap-on-fedora).
    Abrimos um terminal e usamos o comando "sudo snap install arangodb3", digitamos a senha do sudo e esperamos o download e posterior instalação a serem executadas pelo comando. A versão instalada, neste caso, é a mais recente, a 3.5.
+   
+   Já no sistema operacional MacOS, podemos utilizar o seguinte comando para instalar o ArangoDB, no terminal:
+   ```
+   brew install arangodb
+   ```
+   Caso não consiga instalar por causa que não reconhece o comando brew, instalar o homebrew primeiro através do link: https://brew.sh.
         
    Ao terminar a instalação, o servidor ArangoDB já estará rodando em sua máquina pronto para ser acessado.
    
