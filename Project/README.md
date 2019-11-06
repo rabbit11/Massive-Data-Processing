@@ -122,7 +122,7 @@
   
    ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/master-slave1.png)
   
-  Nota: Devido algumas limitações na implementação do ArangoDB, o slave pode realizar alterações na base de dados, mesmo isso sendo incorreto conceitualmente. Isso pode ser lido em mais detalhes no seguinte link:
+  Nota: Devido algumas limitações na implementação do ArangoDB, o slave pode realizar alterações na base de dados, mesmo isso sendo incorreto conceitualmente. Isso pode ser lido em mais detalhes no seguinte link: https://www.arangodb.com/docs/3.5/architecture-deployment-modes-master-slave-limitations.html
   
 ### Active Failover
   Uma arquitetura de *Active Failover* possui as seguintes características:
@@ -225,17 +225,17 @@
     
    Isso irá permitir que a replicação seja realizada em nosso banco.
    
-  ### Inserção de dados na coleção Restaurants
+  ## Inserção de dados na coleção Restaurants
    Ao acessar nossa collection Restaurants, podemos visualizar um botão chamado de import, onde iremos inserir o arquivo json que você encontra neste link: https://drive.google.com/file/d/1AvvqCcpD64Rg1ckVX-4GoJ9eRJXg7sj8/view. Aguarde alguns minutos após a confirmação até que o banco importe todos os dados (essa operação pode ser demorada, pois este arquivo possui milhares de documentos).
    
-  ### Consultas na base de dados
+  ## Consultas na base de dados
    Suponha que você deseja consultar todos os restaurantes da base de dados. Para isso podemos ir até a aba Queries e realizar a seguinte consulta:
    ```
     FOR restaurant in restaurants RETURN restaurant
    ```
    Essa consulta deve retornar todos os restaurantes da base de dados, incluindo o número total de documentos encontrados.
    
-  ### Testando a replicação dos dados
+  ## Testando a replicação dos dados
    A replicação de dados implica que em alguns ou até mesmo todos os nós, devem possuir cópias de parte ou de todos os dados do database. Neste caso definimos nosso *Recplication Factor* desta nossa coleção como 3, o que implica que todos os 3 nós de nosso sistema possuem todos os dados de nossa base de dados. Sendo assim para testarmos a replicação, montamos o seguinte passo a passo:
    
    1. Finalize a instância do ArangoDB no nó master atual.
