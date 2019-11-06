@@ -43,7 +43,7 @@
   #### Terminologia
   Na figura abaixo, há a comparação dos termos entre a linguagem SQL e AQL.
   
-  ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/terminologia.png)
+  ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/terminologia.png)</br>
   **Figura 1: Comparação SQL e AQL ** 
   
   #### Estrutura básica da AQL
