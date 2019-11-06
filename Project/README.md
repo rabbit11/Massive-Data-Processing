@@ -44,7 +44,7 @@
 
   
   #### Inserção de documento:
-  No exemplo abaixo, vamos inserir dentro da tabela Users o nome John Doe e coocando o gender m também.
+  No exemplo abaixo, vamos inserir dentro da tabela Users, o nome John Doe do genêro masculino (m).
  
                   AQL                                                                SQL
    
@@ -85,7 +85,7 @@
   ```
   
   #### Filtro de documentos em seleção:
-  No exemplo abaixo, vamos selectionar o firstname e o lastname concatenados e o gender, onde o campo active for igual a 1 da tabela users.
+  No exemplo abaixo, vamos selecionar o primeiro nome e o sobrenome concatenados e o genÊro, onde o campo active for igual a 1 da tabela users.
   
                 AQL                                                                 SQL
   
@@ -100,7 +100,7 @@
   ```
   
   #### Ordenação de documentos numa seleção:
-  No exemplo baixo, vamos selecionar todos os dados onde tiverem o campo active igual a 1 e ordenados de forma crescente por name e gender.
+  No exemplo baixo, vamos selecionar todos os dados onde tiverem o campo active igual a 1 e ordenados de forma crescente por nome e genêro.
   
                 AQL                                                                 SQL
   
@@ -112,7 +112,7 @@
  ```
  
  #### Contagem de documentos de uma coleção:
- No exemplo abaixo, vamos selecionar o agrupamgento do gender e quantos dados existem com aquele gender onde o campo active for igual a 1.
+ No exemplo abaixo, vamos selecionar o agrupamgento do genÊro e quantos dados existem com aquele genÊro onde o campo active for igual a 1.
  
                 AQL                                                                 SQL
   
