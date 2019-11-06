@@ -29,6 +29,8 @@
   ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/terminologia.png)
   
   #### Estrutura básica da AQL
+  Na tabela abaixo, podemos ver algumas cláusulas do AQL comparadas com a SQL e qual o significado de cada um.
+  
   | Cláusula         | SQL         | Significado                                             |
 |------------------|-------------|---------------------------------------------------------|
 | Filter           | Where       | Define condições para os resultados de retorno          |
