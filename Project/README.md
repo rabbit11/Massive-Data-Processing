@@ -207,7 +207,7 @@
    ```
       arangodb --starter.data-dir=./db2 --starter.port="8530" --starter.join 192.168.15.6:8530
    ```
-  Devemos então receber uma mensagem de sucesso e o endereço de IP e porta que deveremos acessar em nosso browser para acessar a interface do ArangoDB. Normalmente deve ser algo semelhante à: 0.0.0.0:8529
+  Devemos então receber uma mensagem de sucesso e o endereço de IP e porta que deveremos acessar em nosso browser para acessar a interface do ArangoDB. Normalmente deve ser algo semelhante à: http://127.0.0.1:8529/
   
   ### Configuração do Banco de Dados
    Após acessar a interface web do ArangoDB, devemos selecionar o DB System e e clickar em *Select DB:_system*, como nesta imagem:
