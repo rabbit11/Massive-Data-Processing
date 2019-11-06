@@ -188,6 +188,7 @@
   Agora que já cobrimos a parte teórica, nesta seção iremos dar a você o passo a passo de como utilizar o ArangoDB para criar um cluster com 3 nós (sendo cada computador um nó diferente) na arquitetura Master/Slave.
   
 ## Configuração
+
   ### Criação do cluster
   Primeiro devemos configurar aquele nó que inicialmente será o Master, podemos escolher qualquer nó arbitrariamente. O seguinte comando inicia uma instância do arangodb, define um diretório no qual os arquivos armazenados dentro da base de dados deverão ser salvos, e a porta a qual os outros nós devem se conectar. E então no terminal do futuro nó que escolhemos, devemos executar o seguinte comando:
     ```
@@ -211,9 +212,15 @@
   ### Configuração do Banco de Dados
    Após acessar a interface web do ArangoDB, devemos selecionar o DB System e e clickar em *Select DB:_system*, como nesta imagem:
    
+   ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/selectDB-system-arangodb.jpeg?raw=true)
+   
    E então veremos uma tela semelhante à essa:
    
+   ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/dashboard-arangodb.jpeg?raw=true)
+   
    Iremos então para a aba *Database* e clickar em *Add Database*, que então gerará esta tela:
+   
+   ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/createdb-arangodb.jpeg?raw=true)
    
    Neste caso daremos o nome de Restaurants para o nosso database.
    
@@ -249,6 +256,6 @@
    ```
    arangodb --starter.data-dir=./db1 --starter.port="8530" --starter.join 192.168.15.6:8530
    ```
-   Supondo que o IP depois de *--starter.join* seja o IP daquele nó que foi elegido como master.
+   Supondo que o IP depois de *--starter.join* seja o IP daquele nó que foi eleito como master.
    
 ## Referências
