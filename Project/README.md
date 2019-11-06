@@ -5,9 +5,10 @@
 ## Visão Geral
   ArangoDB é um NoSQL, native multi-model, SGBD (Sistema de Gerenciamento de Banco de Dados), o que significa que ele une 3 tipos de modelos de dados dentro de seu núcleo, sendo eles: chave-valor, documentos e grafos. Isso permite que usuários possam armazenar seus dados em qualquer um destes modelos e utilizar apenas uma linguagem declarativa para consultas, inserções, remoções e alterações na base de dados.
         
-  Como ArangoDB é native multi-model é possível realizar consultas combinando padrões de acesso a diferentes tipos de dados em uma única consulta, assim possibilitando consultas que relacionem os dados armazenados nos diferentes modelos.
+  Como ArangoDB é nativo multi-model é possível realizar consultas combinando padrões de acesso a diferentes tipos de dados em uma única consulta, assim possibilitando consultas que relacionem os dados armazenados nos diferentes modelos.
   
   ## Instalação
+  Nesta seção iremos explicar como foi feita a instalação nos sistemas operacionais Linux e MacOS.
   
    ### Fedora
    Devido a falta de suporte da aplicação por meio do site oficial para versões mais recentes do SO, iremos instalar por meio do SnapCraft.
@@ -24,9 +25,12 @@
         
    Ao terminar a instalação, o servidor ArangoDB já estará rodando em sua máquina pronto para ser acessado.
    
-
 ## Configuração
-  Para acessar o servidor entramos no browser e acessamos a seguinte url: http://127.0.0.1:8529, a qual é aponta para a definição padrão de url e porta para o servidor ArangoDB. Nessa página, temos que fazer login, o qual faremos com o usuário "root" que é o já criado como padrão para o servidor.
+  Após ter instalado o ArangoDB em sua máquina, no terminal execute o comando, a seguir, para inicializar e ter acesso ao ArangoDB.
+  ```
+  arangodb
+  ```
+  Para acessar o servidor entramos no browser e acessamos a seguinte url: http://127.0.0.1:8529, a qual aponta para a definição padrão de url e porta para o servidor ArangoDB. Nessa página, temos que fazer login, o qual faremos com o usuário "root" que é o já criado como padrão para o servidor.
   
 ## Comandos Básicos
   ### Nesta seção é exemplificado o uso da linguagem AQL, que é a usada no ArangoDB, para alguns comando básicos e vamos comparar suas estruturas com a SQL.
@@ -313,7 +317,7 @@
    Supondo que o IP depois de *--starter.join* seja o IP daquele nó que foi eleito como master.
    
  ## Exercícios para praticar
- Nesta seção, selecionamos alguns exercícios para praticar a AQL.
+ Nesta seção, selecionamos alguns exercícios para praticar a linguagem do ArangoDB, AQL.
  ```
  1. Escreva uma consulta para inserir o restaurante "Oliver Garden", bairro "Itaim Bibi" e gastronomia "Italian".
  ```
@@ -338,4 +342,4 @@
 ## Referências
 
   [1] ArangoDB. Documentaçao completa. Página inicial. Disponível em: <https://www.arangodb.com/>. Acesso em: 11 de Out. de 2019.
-
+  [2] ArangoDB. Master/Slave Limitations. Disponível em: <https://www.arangodb.com/docs/3.5/architecture-deployment-modes-master-slave-limitations.html>. Acesso em: 03 de Nov. de 2019
