@@ -178,7 +178,7 @@
  ### Master/Slave
   O ArangoDB possui a arquitetura *Master/Slave* onde os *Slaves* recebem dados assíncronos de um *Master*. Nos *Slaves* apenas é possível realizar apenas a leitura dos dados, enquanto o *Master* realiza inserções e atualizações dos dados. Na figura 1, pode ser observado ,de modo simplificada, esta arquitetura.
   
-   ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/master-slave1.png)
+   ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/master-slave1.png)</br>
    **Figura 2: Arquitetura Master/Slave**
   
   Nota: Devido algumas limitações na implementação do ArangoDB, o slave pode realizar alterações na base de dados, mesmo isso sendo incorreto conceitualmente.[2]
@@ -276,29 +276,29 @@
   ### Configuração do Banco de Dados
    Após acessar a interface web do ArangoDB, devemos selecionar o DB System e e clickar em *Select DB:_system*, como nesta imagem:
    
-   ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/selectDB-system-arangodb.jpeg?raw=true)
+   ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/selectDB-system-arangodb.jpeg?raw=true)</br>
    **Figura 4: Tela inicial DB:System**
    
    E então veremos uma tela semelhante à essa:
    
-   ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/dashboard-arangodb.jpeg?raw=true)
+   ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/dashboard-arangodb.jpeg?raw=true)</br>
    **Figura 5: Web interface**
    
    Iremos então para a aba *Database* e clicar em *Add Database*, que então gerará esta tela:
    
-   ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/createdb-arangodb.jpeg?raw=true)
+   ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/createdb-arangodb.jpeg?raw=true)</br>
    **Figura 5: Adicionando banco de dados**
    
    Neste caso daremos o nome de Restaurants para o nosso database.
    
    Após isso devemos clicar nas setas brancas no topo da página, ao lado de *DB:_System*. Como mostrado na figura a seguir:
    
-   ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/troca.png?raw=true)
+   ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/troca.png?raw=true)</br>
    **Figura 1: Trocar de banco**
    
    Ao clicar seremos redirecionados a tela inicial, onde desta vez devemos escolher o database Restaurants e clicar no botão *Select DB: Restaurants*.
    
-   ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/restaurants.png?raw=true)
+   ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/restaurants.png?raw=true)</br>
    **Figura 1: Selecionando Restaurants**
    
    Então deveremos acessar a aba Collections e adicionar uma nova coleção chamada *restaurants*, alterando as seguintes opções:
