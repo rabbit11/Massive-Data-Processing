@@ -294,12 +294,12 @@
    Após isso devemos clicar nas setas brancas no topo da página, ao lado de *DB:_System*. Como mostrado na figura a seguir:
    
    ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/troca.png?raw=true)</br>
-   **Figura 1: Trocar de banco**
+   **Figura 6: Trocar de banco**
    
    Ao clicar seremos redirecionados a tela inicial, onde desta vez devemos escolher o database Restaurants e clicar no botão *Select DB: Restaurants*.
    
    ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/restaurants.png?raw=true)</br>
-   **Figura 1: Selecionando Restaurants**
+   **Figura 7: Selecionando Restaurants**
    
    Então deveremos acessar a aba Collections e adicionar uma nova coleção chamada *restaurants*, alterando as seguintes opções:
    
