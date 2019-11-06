@@ -332,6 +332,8 @@
  ```
  6. Escreva uma consulta que conta quantos restaurantes existem por bairro.
  ```
+ 
+ Respostas: https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/respostas
    
 ## Referências
 
