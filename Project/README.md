@@ -51,7 +51,7 @@
                 AQL                                                                 SQL           
   
   ```
-   REMOVE \{ \_key:"value" \}                                            DELETE FROM users
+   REMOVE { _key:"value" }                                              DELETE FROM users
               IN collections                                             WHERE id = "value";
   ```
   
