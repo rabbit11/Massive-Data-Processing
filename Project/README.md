@@ -165,6 +165,20 @@
                 number: number 
               }
  ```
+ #### Juntando diferentes coleções:
+ No exemplo abaixo, vamos selecionar todos os dados onde há uma junção de coleções.
+ 
+                AQL                                                                  SQL
+                
+ ```
+
+       FOR user IN users                                      SELECT * FROM users
+          FOR friend IN friends                               INNER JOIN friends
+          FILTER friend.user == user._key                     ON (friends.user = users.id);
+          RETURN MERGE(user, friend)                
+
+ ```              
+ 
  
  ##  Replicação e arquitetura de distribuição de dados
  ### Replicação
@@ -273,33 +287,38 @@
    ```
   Devemos então receber uma mensagem de sucesso e o endereço de IP e porta que deveremos acessar em nosso browser para acessar a interface do ArangoDB. Normalmente deve ser algo semelhante à: http://127.0.0.1:8529/
   
+  Na figura a seguir, ilustramos de fato o que está acontecendo no terminal.
+  
+  ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/tentou.jpeg)</br>
+  **Figura 4: Ilustração do terminal**
+  
   ### Configuração do Banco de Dados
    Após acessar a interface web do ArangoDB, devemos selecionar o DB System e e clickar em *Select DB:_system*, como nesta imagem:
    
    ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/selectDB-system-arangodb.jpeg?raw=true)</br>
-   **Figura 4: Tela inicial DB:System**
+   **Figura 5: Tela inicial DB:System**
    
    E então veremos uma tela semelhante à essa:
    
    ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/dashboard-arangodb.jpeg?raw=true)</br>
-   **Figura 5: Web interface**
+   **Figura 6: Web interface**
    
    Iremos então para a aba *Database* e clicar em *Add Database*, que então gerará esta tela:
    
    ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/createdb-arangodb.jpeg?raw=true)</br>
-   **Figura 5: Adicionando banco de dados**
+   **Figura 7: Adicionando banco de dados**
    
    Neste caso daremos o nome de Restaurants para o nosso database.
    
    Após isso devemos clicar nas setas brancas no topo da página, ao lado de *DB:_System*. Como mostrado na figura a seguir:
    
    ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/troca.png?raw=true)</br>
-   **Figura 6: Trocar de banco**
+   **Figura 8: Trocar de banco**
    
    Ao clicar seremos redirecionados a tela inicial, onde desta vez devemos escolher o database Restaurants e clicar no botão *Select DB: Restaurants*.
    
    ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/restaurants.png?raw=true)</br>
-   **Figura 7: Selecionando Restaurants**
+   **Figura 9: Selecionando Restaurants**
    
    Então deveremos acessar a aba Collections e adicionar uma nova coleção chamada *restaurants*, alterando as seguintes opções:
    
@@ -307,6 +326,9 @@
    * Replication Factor: 3
     
    Isso irá permitir que a replicação seja realizada em nosso banco.
+   
+   ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/replicacao.jpeg)</br>
+   **Figura 10: Adicionando replicação**
    
    Nota: Essa opções para colocar a quantidade de replicação e o fator só podem ser feitos quando existe um ou mais slaves.
    
@@ -325,6 +347,10 @@
    
    1. Finalize a instância do ArangoDB no nó master atual.
    2. Aguarde a eleição de um novo master (isso pode ser observado através do terminal, onde em um dos computadores deve retornar uma mensagem como: *Just Became Master*).
+   
+   ![](https://github.com/rabbit11/Massive-Data-Processing/blob/master/Project/img/master.jpeg)</br>
+   **Figura 11: Eleição do master**
+   
    3. Realize a seguinte consulta:
    ```
     FOR restaurant in restaurants RETURN restaurant
