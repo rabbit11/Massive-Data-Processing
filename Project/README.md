@@ -321,7 +321,7 @@
    Essa consulta deve retornar todos os restaurantes da base de dados, incluindo o número total de documentos encontrados.
    
   ## Testando a replicação dos dados
-   A replicação de dados implica que em alguns ou até mesmo todos os nós, devem possuir cópias de parte ou de todos os dados do database. Neste caso definimos nosso *Recplication Factor* desta nossa coleção como 3, o que implica que todos os 3 nós de nosso sistema possuem todos os dados de nossa base de dados. Sendo assim para testarmos a replicação, montamos o seguinte passo a passo:
+   A replicação de dados implica que em alguns ou até mesmo todos os nós, devem possuir cópias de parte ou de todos os dados do database. Neste caso definimos nosso *Replication Factor* desta nossa coleção como 3, o que implica que todos os 3 nós de nosso sistema possuem todos os dados de nossa base de dados. Sendo assim para testarmos a replicação, montamos o seguinte passo a passo:
    
    1. Finalize a instância do ArangoDB no nó master atual.
    2. Aguarde a eleição de um novo master (isso pode ser observado através do terminal, onde em um dos computadores deve retornar uma mensagem como: *Just Became Master*).
