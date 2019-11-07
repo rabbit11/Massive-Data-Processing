@@ -166,7 +166,15 @@
               }
  ```
  
- ## Arquitetura de distribuição de dados e replicação
+ ##  Replicação e arquitetura de distribuição de dados
+ ### Replicação
+   A replicação pode ser definida como cópias dos dados de um nó do sistema para outro, de forma a permitir recuperação de falhas no caso de quedas de conexões entre servidores. Para isso o ArangoDB oferece dois tipos de replicação: síncrona e assíncrona.
+   
+   #### Replicação síncrona
+   A replicação síncrona funciona apenas entre servidores dentro de um mesmo cluster, e é normalmente utilizada para operações críticas, onde os dados devem estar disponíveis a todo o momento. Normalmente este tipo de replicação guarda uma cópia de um fragmento dos dados em um ou mais outros servidores. Desta forma as operações de escrita só são devidamente validadas quando todas as réplicas efetuarem aquela operação de escrita, o que aumenta a latência desta operação, porém caso uma falha ocorra logo após a escrita, temos a garantia de que os dados presentes em qualquer uma das réplicas é o dado mais recente.
+   
+   #### Replicação assíncrona
+   A replicação assíncrona é usada principalmente na arquitetura de master/slave, de forma que os slaves conectam-se aos seus respectivos masters e aplicam localmente os eventos já aplicados ao master em mesma ordem, como resultado os slaves terão os dados no mesmo estado que os seus respectivos masters.
  
  #### Nesta seção serão exemplicados todos os tipos de arquitetura presentes no ArangoDB.
  
@@ -176,12 +184,13 @@
    Mesmo sem todos os recursos citados anteriormente, é possível rodar múltiplos processos na mesma máquina com esta arquitetura, contanto que as portas e os dados sejam configurados diferentemente.
    
  ### Master/Slave
-  O ArangoDB possui a arquitetura *Master/Slave* onde os *Slaves* recebem dados assíncronos de um *Master*. Nos *Slaves* apenas é possível realizar apenas a leitura dos dados, enquanto o *Master* realiza inserções e atualizações dos dados. Na figura 1, pode ser observado ,de modo simplificada, esta arquitetura.
+  O ArangoDB possui a arquitetura *Master/Slave* onde os *Slaves* recebem dados assíncronos de um *Master*. Nos *Slaves* deveria ser possível apenas realizar a leitura dos dados, enquanto o *Master* realiza inserções e atualizações dos dados.
+  Devido algumas limitações na implementação do ArangoDB, o slave pode realizar alterações na base de dados, mesmo isso sendo incorreto conceitualmente.[2] Na figura 1, pode ser observado, de modo simplificada, esta arquitetura.
   
    ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/master-slave1.png)</br>
    **Figura 2: Arquitetura Master/Slave**
   
-  Nota: Devido algumas limitações na implementação do ArangoDB, o slave pode realizar alterações na base de dados, mesmo isso sendo incorreto conceitualmente.[2]
+  Nota: 
   
 ### Active Failover
   Uma arquitetura de *Active Failover* possui as seguintes características:
@@ -197,15 +206,6 @@
    
 ### Cluster
   A arquitetura de clusters no ArangoDB é CP master/master, o que significa (em termos do teorema CAP) que durante uma falha de conexão entre nós no servidor, este SGBD prioriza consistência interna no lugar de disponibilidade. Além disso uma arquitetura master/master permite que clientes podem mandar requisições de maneira arbitrária para qualquer nó e obter a mesma "visão" dos dados, sem um único ponto de falha, já que o cluster pode ainda servir a requisições mesmo com falhas em algumas máquinas.
-    
-### Replicação
-   A replicação pode ser definida como cópias dos dados de um nó do sistema para outro, de forma a permitir recuperação de falhas no caso de quedas de conexões entre servidores. Para isso o ArangoDB oferece dois tipos de replicação: síncrona e assíncrona.
-   
-   #### Replicação síncrona
-   A replicação síncrona funciona apenas entre servidores dentro de um mesmo cluster, e é normalmente utilizada para operações críticas, onde os dados devem estar disponíveis a todo o momento. Normalmente este tipo de replicação guarda uma cópia de um fragmento dos dados em um ou mais outros servidores. Desta forma as operações de escrita só são devidamente validadas quando todas as réplicas efetuarem aquela operação de escrita, o que aumenta a latência desta operação, porém caso uma falha ocorra logo após a escrita, temos a garantia de que os dados presentes em qualquer uma das réplicas é o dado mais recente.
-   
-   #### Replicação assíncrona
-   A replicação assíncrona é usada principalmente na arquitetura de master/slave, de forma que os slaves conectam-se aos seus respectivos masters e aplicam localmente os eventos já aplicados ao master em mesma ordem, como resultado os slaves terão os dados no mesmo estado que os seus respectivos masters.
 
 ## Implementação de Propriedades
 
