@@ -354,7 +354,7 @@
  5. Escreva uma consulta para retornar os campos nome do restaurante, bairro, gastronomia e endereço dos restaurantes que estão no bairro "Queens" de forma que o nome dos restaurantes estejam em ordem crescente.
  ```
  ```
- 6. Escreva uma consulta que conta quantos restaurantes existem por bairro.
+ 6. Escreva uma consulta para contar quantos restaurantes existem por bairro.
  ```
  
  Respostas: https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/respostas
