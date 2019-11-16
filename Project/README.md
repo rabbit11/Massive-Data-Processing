@@ -1,6 +1,41 @@
 # ArangoDB Tutorial
 
-#### Neste tutorial iremos cobrir alguns conceitos básicos sobre ArangoDB e algumas de suas arquiteturas, além de mostrar o passo a passo necessário para a criação de um sistema com um cluster e 3 nós na arquitetura Master/Slave
+#### Neste tutorial iremos cobrir alguns conceitos básicos sobre ArangoDB e algumas de suas arquiteturas, além de mostrar o passo a passo necessário para a criação de um sistema com um cluster e 3 nós na arquitetura Master/Slave.
+
+## Índice
+
+  * [Visão Geral](#visão-geral)
+  * [Instalação](#instalação)
+    + [Linux (Fedora)](#linux-fedora)
+    + [MacOS](#macos)
+  * [Configuração](#configuração)
+  * [Comandos Básicos](#comandos-básicos)
+  * [Replicação e arquitetura de distribuição de dados](#replicação-e-arquitetura-de-distribuição-de-dados)
+    + [Replicação](#replicação)
+      - [Replicação síncrona](#replicação-síncrona)
+      - [Replicação assíncrona](#replicação-assíncrona)
+    + [Single Instance](#single-instance)
+    + [Master/Slave](#master-slave)
+    + [Active Failover](#active-failover)
+    + [Cluster](#cluster)
+  * [Implementação de Propriedades](#implementação-de-propriedades)
+    + [Consistência](#consistência)
+    + [Transações](#transações)
+    + [Disponibilidade](#disponibilidade)
+    + [Escalabilidade](#escalabilidade)
+    + [Quórum](#quórum)
+  * [Quando utilizar ArangoDB](#quando-utilizar-arangodb)
+  * [Quando não utilizar](#quando-não-utilizar)
+  * [Parte Prática](#parte-prática)
+  * [Configuração](#configuração-1)
+    + [Criação do cluster](#criação-do-cluster)
+    + [Configuração do Banco de Dados](#configuração-do-banco-de-dados)
+  * [Inserção de dados na coleção Restaurants](#inserção-de-dados-na-coleção-restaurants)
+  * [Consultas na base de dados](#consultas-na-base-de-dados)
+  * [Testando a replicação dos dados](#testando-a-replicação-dos-dados)
+  * [Exercícios para praticar](#exercícios-para-praticar)
+  * [Referências](#referências)
+
 
 ## Visão Geral
   ArangoDB é um NoSQL, native multi-model, SGBD (Sistema de Gerenciamento de Banco de Dados), o que significa que ele une 3 tipos de modelos de dados dentro de seu núcleo, sendo eles: chave-valor, documentos e grafos. Isso permite que usuários possam armazenar seus dados em qualquer um destes modelos e utilizar apenas uma linguagem declarativa para consultas, inserções, remoções e alterações na base de dados.
@@ -10,7 +45,7 @@
   ## Instalação
   Nesta seção iremos explicar como foi feita a instalação da versão 3.5.1 do ArangoDB nos sistemas operacionais Linux e MacOS. 
   
-   ### Linux (Fedora)
+   ### Linux Fedora
    Devido a falta de suporte da aplicação por meio do site oficial para versões mais recentes do SO, iremos instalar por meio do SnapCraft.
         
    Assumiremos que o SnapCraft já está instalado (caso não esteja, o link para instalação é este: 
@@ -197,7 +232,7 @@
    
    Mesmo sem todos os recursos citados anteriormente, é possível rodar múltiplos processos na mesma máquina com esta arquitetura, contanto que as portas e os dados sejam configurados diferentemente.
    
- ### Master/Slave
+ ### Master Slave
   O ArangoDB possui a arquitetura *Master/Slave* onde os *Slaves* recebem dados assíncronos de um *Master*. Nos *Slaves* deveria ser possível apenas realizar a leitura dos dados, enquanto o *Master* realiza inserções e atualizações dos dados.
   Devido algumas limitações na implementação do ArangoDB, o slave pode realizar alterações na base de dados, mesmo isso sendo incorreto conceitualmente.[2] Na figura 1, pode ser observado, de modo simplificada, esta arquitetura.
   
@@ -219,6 +254,7 @@
    A vantagem do uso de Active Failover quando comparada a arquitetura Master/Slave tradicional seria a terceira entidade chamada Agency que observa e está envolvida em todos os processos dos servidores. Followers podem contar com o Agency para determinar se estão conectados ao server Leader correto. Isso faz com que este tipo de arquitetura tenha uma maior resiliência, já que todos os drivers oficiais do ArangoDB são capazes de determinar o servidor Leader corretamente e redirecionar aquela requisição apropriadamente.
    
 ### Cluster
+  Enquanto as arquiteturas citadas acima se referiam a arquitetura entre os nós dentro dos clusters, aqui definimos a arquitetura implementada no ArangoDB entre clusters, ou seja, como diferente clusters se relacionam dentro do sistema.
   A arquitetura de clusters no ArangoDB é CP master/master, o que significa (em termos do teorema CAP) que durante uma falha de conexão entre nós no servidor, este SGBD prioriza consistência interna no lugar de disponibilidade. Além disso uma arquitetura master/master permite que clientes podem mandar requisições de maneira arbitrária para qualquer nó e obter a mesma "visão" dos dados, sem um único ponto de falha, já que o cluster pode ainda servir a requisições mesmo com falhas em algumas máquinas.
 
 ## Implementação de Propriedades
@@ -249,7 +285,8 @@
    Infelizmente na documentação do ArangoDB não foi encontrada nenhuma forma de mostrar os efeitos da escalabilidade de maneira nativa, apenas exemplos de como podemos utilizar ferramentas externas para mensurar o tempo, uso de CPU e memória para diferentes operações, como no caso deste blog [3]. 
    
 ### Quórum
-  Apesar da documentação do ArangoDB não definir explicitamente o conceito de Quórum, ou até mesmo sua implementação, observamos seu funcionamento durante este tutorial ao derrubar dois nós de uma arquitetura *Master/Slave* com três nós, o sistema impede qualquer acesso à base de dados, seja para leitura ou escrita. Portanto acreditamos que o conceito de Quórum esteja presente nativamente no ArangoDB, de forma a forçar que pelo menos metade dos nós presentes na arquitetura estejam conectados e funcionando a todo momento, acreditamos também que este número de nós que devem fazer parte da arquitetura do sistema, seja definido através do *Replication Factor*. Esse conceito será explicado em maior profundidade durante a parte prática.
+  Quórum em banco de dados NoSQL, pode ser definido breviamente como o número mínimo de nós necessários para realizar uma operação de leitura ou escrita na base de dados. Essa característica existe para preservar a consistência dos dados em arquiteturas com diversos nós, normalmente este conceito é reforçado para operações de inserção ou atualização de dados, de forma a garantir que inicialmente pelo menos uma parcela (normalmente metade dos nós presentes no sistema) receba aquela atualização de maneira imediata e então essa atualização seja repassada para os outros nós do sistema.
+  Apesar da documentação do ArangoDB não definir explicitamente o conceito de Quórum, ou até mesmo sua implementação, observamos seu funcionamento durante este tutorial ao derrubar dois nós de uma arquitetura *Master/Slave* com três nós, o sistema impede qualquer acesso à base de dados, seja para leitura ou escrita. Portanto acreditamos que o conceito de Quórum esteja presente nativamente no ArangoDB em sistemas com arquitetura *Master/Slave* que possuem fator de replicação, de forma a forçar que pelo menos metade dos nós presentes na arquitetura estejam conectados e funcionando a todo momento, acreditamos também que este número de nós, esteja relacionado com o *Replication Factor* (fator de replicação do sistema) definido durante a criação da base de dados. Mostraremos como este fator de replicação pode ser definido durante a parte prática deste tutorial.
    
 ## Quando utilizar ArangoDB
 
