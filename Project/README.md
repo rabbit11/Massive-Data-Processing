@@ -204,7 +204,7 @@
    ![](https://raw.githubusercontent.com/rabbit11/Massive-Data-Processing/master/Project/img/master-slave1.png)</br>
    **Figura 2: Arquitetura Master/Slave**
   
-  Nota: 
+  Nota: Devido algumas limitações na implementação do ArangoDB, o slave pode realizar alterações na base de dados, mesmo isso sendo incorreto conceitualmente.[2]
   
 ### Active Failover
   Uma arquitetura de *Active Failover* possui as seguintes características:
@@ -245,6 +245,11 @@
    Base de dados que podem escalar de maneira horizontal também permitem que sistemas adéquem sua capacidade de processamento e armazenamento de acordo com a demanda, ou seja, durante altas demandas podemos aumentar o número de servidores (aumentando a escala horizontal) e durante momentos de baixa demanda, podemos desalocar alguns nós do sistema de forma a cortar custos.
    
    Apesar de todas as vantagens citadas acima sobre escalar o sistema horizontalmente, o ArangoDB também permite que o sistema o escale de maneira vertical, apesar de ser menos eficiente na maior parte dos casos.
+   
+   Infelizmente na documentação do ArangoDB não foi encontrada nenhuma forma de mostrar os efeitos da escalabilidade de maneira nativa, apenas exemplos de como podemos utilizar ferramentas externas para mensurar o tempo, uso de CPU e memória para diferentes operações, como no caso deste blog [3]. 
+   
+### Quórum
+  Apesar da documentação do ArangoDB não definir explicitamente o conceito de Quórum, ou até mesmo sua implementação, observamos seu funcionamento durante este tutorial ao derrubar dois nós de uma arquitetura *Master/Slave* com três nós, o sistema impede qualquer acesso à base de dados, seja para leitura ou escrita. Portanto acreditamos que o conceito de Quórum esteja presente nativamente no ArangoDB, de forma a forçar que pelo menos metade dos nós presentes na arquitetura estejam conectados e funcionando a todo momento, acreditamos também que este número de nós que devem fazer parte da arquitetura do sistema, seja definido através do *Replication Factor*. Esse conceito será explicado em maior profundidade durante a parte prática.
    
 ## Quando utilizar ArangoDB
 
@@ -390,3 +395,5 @@
   [1] ArangoDB. Documentaçao completa. Página inicial. Disponível em: <https://www.arangodb.com/>. Acesso em: 11 de Out. de 2019.
   
   [2] ArangoDB. Master/Slave Limitations. Disponível em: <https://www.arangodb.com/docs/3.5/architecture-deployment-modes-master-slave-limitations.html>. Acesso em: 03 de Nov. de 2019
+  
+  [3] Blog. Escalabilidade no ArangoDB. Disponível em: https://d2iq.com/blog/arangodb-benchmark-dcos Acesso em: 16 de Nov. de 2019.
